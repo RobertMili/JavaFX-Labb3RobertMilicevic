@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labb3.GameViewController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button text="Cirkel" fx:id="cirkelButton" onAction="#onCirkelClicked"/>
+            <Button text="Rectangle" fx:id="rectangleButton" onAction="#onRectangleClicked"/>
+            <ColorPicker                                 fx:id="colorPicked"/>
+            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Button" />
+         </children></HBox>
+   </top>
+   <center>
+      <Canvas height="448.0" width="494.0" BorderPane.alignment="CENTER" fx:id="canvas" onKeyPressed="#canvasClicked"/>
+   </center>
+
+
+
+</BorderPane>
