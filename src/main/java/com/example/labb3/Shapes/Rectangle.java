@@ -1,14 +1,8 @@
 package com.example.labb3.Shapes;
 
-import com.example.labb3.Shapes.*;
-import com.example.labb3.Shapes.Shape;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
-
-import java.io.IOException;
-import java.util.Objects;
 
 public class Rectangle extends Shape {
 
@@ -50,9 +44,9 @@ public class Rectangle extends Shape {
 
 
 
-    public void paint(GraphicsContext graphicsContext){
+    public void draw(GraphicsContext graphicsContext, ColorPicker colorPicker){
         try {
-            graphicsContext.setFill(Color.BLUE);
+            graphicsContext.setFill(colorPicker.getValue());
             graphicsContext.fillRect(50, 50, 100, 100);
 
         } catch(Exception e) {

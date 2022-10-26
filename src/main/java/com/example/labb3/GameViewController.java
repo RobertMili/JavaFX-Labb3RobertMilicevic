@@ -1,4 +1,5 @@
 package com.example.labb3;
+
 import com.example.labb3.Shapes.*;
 
 import javafx.event.ActionEvent;
@@ -15,11 +16,9 @@ public class GameViewController {
     public Canvas canvas;
     public GraphicsContext graphicsContext;
 
-
+    public Model model = new Model();
     public Button rectangleButton;
 
-    public Rectangle rectangle = new Rectangle(new Position(50,50),Color.AQUA,2.0);
-    public Cirkel cirkel = new Cirkel(new Position(50,50), Color.AQUA,2);
     public ColorPicker colorPicked;
 
 
@@ -29,19 +28,23 @@ public class GameViewController {
     }
 
     public void onCirkelClicked(ActionEvent actionEvent) {
-        //graphicsContext.setFill(colorPicked.getValue());
-        cirkel.paint(graphicsContext);
+
+        model.cirkel.draw(graphicsContext,colorPicked);
     }
 
     public void onRectangleClicked(ActionEvent actionEvent) {
 
-        rectangle.paint(graphicsContext);
+
+        model.rectangle.draw(graphicsContext,colorPicked);
+
 
 
     }
 
     public void canvasClicked(MouseEvent mouseEvent) {
 
+       model.setMouseX(mouseEvent.getX());
+       model.setMouseY(mouseEvent.getY());
 
     }
 }

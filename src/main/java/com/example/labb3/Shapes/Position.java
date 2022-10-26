@@ -1,4 +1,4 @@
 package com.example.labb3.Shapes;
 
-public record Position(int x, int y ) {
+public record Position(double x, double y ) {
 }
