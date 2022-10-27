@@ -1,10 +1,11 @@
 package com.example.labb3.Shapes;
 
+import com.example.labb3.Model;
 import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
-public class Shape {
+public class Shape  {
 
     private Position position;
     private Color color;

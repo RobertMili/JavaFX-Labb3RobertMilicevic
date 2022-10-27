@@ -29,8 +29,8 @@ public class GameViewController {
 
     public void onCirkelClicked(ActionEvent actionEvent) {
 
-        model.cirkel.draw(graphicsContext,colorPicked);
-
+       model.cirkel.draw(graphicsContext,colorPicked);
+        //model.clickCirkel();
 
     }
 

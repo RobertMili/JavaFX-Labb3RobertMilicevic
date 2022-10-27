@@ -4,6 +4,8 @@ import com.example.labb3.Shapes.Cirkel;
 import com.example.labb3.Shapes.Position;
 import com.example.labb3.Shapes.Rectangle;
 import com.example.labb3.Shapes.Shape;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -17,8 +19,8 @@ public class Model {
 
     List<Shape> shape = new ArrayList<>();
 
-    public Rectangle rectangle = new Rectangle(new Position(getMouseX() , getMouseY()), Color.AQUA, 2.0); // This need to be i Modul
-    public Cirkel cirkel = new Cirkel(new Position(50, 50), Color.AQUA, 2);
+    public Rectangle rectangle= new Rectangle(new Position(getMouseX() , getMouseY()), Color.AQUA, 2.0); // This need to be i Modul
+    public Cirkel cirkel=  new Cirkel(new Position(getMouseX(), getMouseY()), Color.AQUA, 2);
 
     //Shape shape = new Shape();
 
@@ -47,8 +49,11 @@ public class Model {
         this.rectangle = rectangle;
     }
 
-    void test (){
-        System.out.println(getMouseY());
-        System.out.println(getMouseY());
+    public void clickCirkel (){
+        if (cirkel != null) {
+            cirkel = new Cirkel(new Position(getMouseX(),getMouseY()), Color.AQUA, 2);
+        } else {
+            System.out.println("Error");
+        }
     }
 }
