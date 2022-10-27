@@ -16,6 +16,7 @@ public class Model {
 
     private double mouseX;
     private double mouseY;
+    private int size = 100;
 
     List<Shape> shape = new ArrayList<>();
 
@@ -53,7 +54,7 @@ public class Model {
 
         try {
                 graphicsContext.setFill(colorPicker.getValue());
-                graphicsContext.fillOval(getMouseX()  , getMouseY() , 100, 100);
+                graphicsContext.fillOval(getMouseX() - size / 2, getMouseY() - size / 2 , size, size);
 
         } catch (Exception e) {
             System.out.println("Error with draw");
@@ -63,7 +64,7 @@ public class Model {
 
         try {
             graphicsContext.setFill(colorPicker.getValue());
-            graphicsContext.fillRect(getMouseX() , getMouseY() , 100, 100);
+            graphicsContext.fillRect(getMouseX() - size / 2 , getMouseY() - size / 2  , 100, 100);
         } catch (Exception e) {
             System.out.println("Error with draw");
         }
