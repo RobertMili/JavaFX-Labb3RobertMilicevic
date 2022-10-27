@@ -51,10 +51,10 @@ public class Model {
     public void drawCirkel(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 
         try {
-            //if ()
+
             graphicsContext.setFill(colorPicker.getValue());
             graphicsContext.fillOval(getMouseX(),getMouseY() , 100, 100);
-
+            System.out.println("test");
         } catch (Exception e) {
             System.out.println("Error");
         }
