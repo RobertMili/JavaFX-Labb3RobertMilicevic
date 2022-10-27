@@ -17,7 +17,7 @@ public class Model {
 
     List<Shape> shape = new ArrayList<>();
 
-    public Rectangle rectangle= new Rectangle(new Position(getMouseX() , getMouseY()), Color.AQUA, 2.0); // This need to be i Modul
+    public Rectangle rectangle = new Rectangle(new Position(getMouseX() , getMouseY()), Color.AQUA, 2.0); // This need to be i Modul
     public Cirkel cirkel = new Cirkel(new Position(50, 50), Color.AQUA, 2);
 
     //Shape shape = new Shape();
@@ -45,6 +45,10 @@ public class Model {
 
     public void setRectangle(Rectangle rectangle) {
         this.rectangle = rectangle;
+    }
 
+    void test (){
+        System.out.println(getMouseY());
+        System.out.println(getMouseY());
     }
 }

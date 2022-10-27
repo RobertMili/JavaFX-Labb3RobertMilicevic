@@ -8,16 +8,16 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <Button text="Cirkel" fx:id="cirkelButton" onAction="#onCirkelClicked"/>
-            <Button text="Rectangle" fx:id="rectangleButton" onAction="#onRectangleClicked"/>
-            <ColorPicker                                 fx:id="colorPicked"/>
+            <Button fx:id="cirkelButton" onAction="#onCirkelClicked" text="Cirkel" />
+            <Button fx:id="rectangleButton" onAction="#onRectangleClicked" text="Rectangle" />
+            <ColorPicker fx:id="colorPicked" />
             <Button mnemonicParsing="false" text="Button" />
             <Button mnemonicParsing="false" text="Button" />
          </children></HBox>
    </top>
-   <center>
-      <Canvas height="448.0" width="494.0" BorderPane.alignment="CENTER" fx:id="canvas" onKeyPressed="#canvasClicked"/>
-   </center>
+   <left>
+      <Canvas fx:id="canvas" height="448.0" onMouseClicked="#canvasClicked" width="494.0" BorderPane.alignment="CENTER" />
+   </left>
 
 
 

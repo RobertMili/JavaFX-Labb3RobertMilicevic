@@ -18,8 +18,9 @@ public class GameViewController {
 
     public Model model = new Model();
     public Button rectangleButton;
-
     public ColorPicker colorPicked;
+
+    Cirkel cirkel;
 
 
     public void initialize() {
@@ -29,6 +30,8 @@ public class GameViewController {
     public void onCirkelClicked(ActionEvent actionEvent) {
 
         model.cirkel.draw(graphicsContext,colorPicked);
+
+
     }
 
     public void onRectangleClicked(ActionEvent actionEvent) {
