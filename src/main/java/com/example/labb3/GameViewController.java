@@ -24,7 +24,6 @@ public class GameViewController {
 
     public void initialize() {
         graphicsContext = canvas.getGraphicsContext2D();
-
     }
 
     public void onCirkelClicked(ActionEvent actionEvent) {
@@ -34,11 +33,7 @@ public class GameViewController {
 
     public void onRectangleClicked(ActionEvent actionEvent) {
 
-
         model.rectangle.draw(graphicsContext,colorPicked);
-
-
-
     }
 
     public void canvasClicked(MouseEvent mouseEvent) {
