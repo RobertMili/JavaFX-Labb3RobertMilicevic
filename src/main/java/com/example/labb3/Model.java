@@ -6,7 +6,6 @@ import com.example.labb3.Shapes.Rectangle;
 import com.example.labb3.Shapes.Shape;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -49,9 +48,10 @@ public class Model {
         this.rectangle = rectangle;
     }
 
-    public void drawModel(GraphicsContext graphicsContext, ColorPicker colorPicker) {
+    public void drawCirkel(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 
         try {
+            //if ()
             graphicsContext.setFill(colorPicker.getValue());
             graphicsContext.fillOval(getMouseX(),getMouseY() , 100, 100);
 

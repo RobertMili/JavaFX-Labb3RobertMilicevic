@@ -7,9 +7,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 public class GameViewController {
     public Button cirkelButton;
@@ -29,8 +27,7 @@ public class GameViewController {
 
     public void onCirkelClicked(ActionEvent actionEvent) {
 
-       //model.cirkel.draw(graphicsContext,colorPicked);
-        model.drawModel(graphicsContext,colorPicked);
+        model.drawCirkel(graphicsContext,colorPicked);
 
     }
 

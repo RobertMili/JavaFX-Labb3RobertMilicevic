@@ -13,16 +13,7 @@ public class Cirkel extends Shape {
         super(position, color, size);
     }
 
-    public void draw(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 
-        try {
-                graphicsContext.setFill(colorPicker.getValue());
-                graphicsContext.fillOval(30,30 , 100, 100);
-
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
-    }
 
 
 }
