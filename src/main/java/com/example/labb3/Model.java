@@ -19,8 +19,8 @@ public class Model {
 
     List<Shape> shape = new ArrayList<>();
 
-    public Rectangle rectangle= new Rectangle(new Position(getMouseX() , getMouseY()), Color.AQUA, 2.0); // This need to be i Modul
-    public Cirkel cirkel=  new Cirkel(new Position(getMouseX(), getMouseY()), Color.AQUA, 2);
+    public Rectangle rectangle = new Rectangle(new Position(getMouseX() , getMouseY()), Color.AQUA, 2.0); // This need to be i Modul
+    public Cirkel cirkel =  new Cirkel(new Position(getMouseX(), getMouseY()), Color.AQUA, 2);
 
     //Shape shape = new Shape();
 
@@ -49,10 +49,13 @@ public class Model {
         this.rectangle = rectangle;
     }
 
-    public void clickCirkel (){
-        if (cirkel != null) {
-            cirkel = new Cirkel(new Position(getMouseX(),getMouseY()), Color.AQUA, 2);
-        } else {
+    public void drawModel(GraphicsContext graphicsContext, ColorPicker colorPicker) {
+
+        try {
+            graphicsContext.setFill(colorPicker.getValue());
+            graphicsContext.fillOval(getMouseX(),getMouseY() , 100, 100);
+
+        } catch (Exception e) {
             System.out.println("Error");
         }
     }
