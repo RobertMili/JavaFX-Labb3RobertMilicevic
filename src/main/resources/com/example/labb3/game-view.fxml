@@ -4,20 +4,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labb3.GameViewController">
-   <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="500.0">
-         <children>
-            <Button fx:id="cirkelButton" mnemonicParsing="false" onAction="#onCirkelClicked" text="Cirkel" />
-            <Button fx:id="rectangleButton" mnemonicParsing="false" onAction="#onRectangleClicked" text="Rectangle" />
-            <ColorPicker fx:id="colorPicked" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-         </children>
-      </HBox>
-      <Pane layoutX="-1.0" layoutY="46.0" prefHeight="633.0" prefWidth="690.0">
-         <children>
-            <Canvas fx:id="canvas" height="643.0" layoutX="11.0" layoutY="4.0" onMouseClicked="#canvasClicked" width="690.0" BorderPane.alignment="TOP_LEFT" />
-         </children></Pane>
-   </children>
+<AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labb3.GameViewController">
+   <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="500.0">
+      <children>
+         <Button fx:id="cirkelButton" mnemonicParsing="false" onAction="#onCirkelClicked" text="Cirkel"/>
+         <Button fx:id="rectangleButton" mnemonicParsing="false" onAction="#onRectangleClicked" text="Rectangle"/>
+         <ColorPicker fx:id="colorPicked"/>
+         <Button mnemonicParsing="false" text="Button"/>
+         <Button mnemonicParsing="false" text="Button"/>
+      </children>
+   </HBox>
+   <Pane layoutX="-1.0" layoutY="46.0" prefHeight="633.0" prefWidth="690.0">
+      <children>
+         <Canvas fx:id="canvas" height="643.0" layoutX="11.0" layoutY="4.0" onMouseClicked="#canvasClicked"
+                 width="690.0" BorderPane.alignment="TOP_LEFT"/>
+      </children>
+   </Pane>
 </AnchorPane>
