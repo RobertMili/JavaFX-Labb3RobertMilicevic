@@ -44,13 +44,5 @@ public class Rectangle extends Shape {
 
 
 
-    public void draw(GraphicsContext graphicsContext, ColorPicker colorPicker){
-        try {
-            graphicsContext.setFill(colorPicker.getValue());
-            graphicsContext.fillRect(50, 50, 100, 100);
 
-        } catch(Exception e) {
-            System.out.println("Error");
-        }
-        }
     }

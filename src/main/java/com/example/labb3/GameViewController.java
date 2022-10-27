@@ -33,7 +33,7 @@ public class GameViewController {
 
     public void onRectangleClicked(ActionEvent actionEvent) {
 
-        model.rectangle.draw(graphicsContext,colorPicked);
+        model.drawRectangle(graphicsContext,colorPicked);
     }
 
     public void canvasClicked(MouseEvent mouseEvent) {
@@ -41,6 +41,6 @@ public class GameViewController {
        model.setMouseX(mouseEvent.getX());
        model.setMouseY(mouseEvent.getY());
 
-
     }
+
 }

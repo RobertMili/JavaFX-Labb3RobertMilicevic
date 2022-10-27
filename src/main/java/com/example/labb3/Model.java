@@ -5,6 +5,7 @@ import com.example.labb3.Shapes.Position;
 import com.example.labb3.Shapes.Rectangle;
 import com.example.labb3.Shapes.Shape;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
@@ -18,8 +19,8 @@ public class Model {
 
     List<Shape> shape = new ArrayList<>();
 
-    public Rectangle rectangle = new Rectangle(new Position(getMouseX() , getMouseY()), Color.AQUA, 2.0); // This need to be i Modul
-    public Cirkel cirkel =  new Cirkel(new Position(getMouseX(), getMouseY()), Color.AQUA, 2);
+    public Rectangle rectangle;// = new Rectangle(new Position(getMouseX() , getMouseY()), Color.AQUA, 2.0); // This need to be i Modul
+    public Cirkel cirkel; // =  new Cirkel(new Position(getMouseX(), getMouseY()), Color.AQUA, 2);
 
     //Shape shape = new Shape();
 
@@ -51,12 +52,20 @@ public class Model {
     public void drawCirkel(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 
         try {
+                graphicsContext.setFill(colorPicker.getValue());
+                graphicsContext.fillOval(getMouseX()  , getMouseY() , 100, 100);
 
-            graphicsContext.setFill(colorPicker.getValue());
-            graphicsContext.fillOval(getMouseX(),getMouseY() , 100, 100);
-            System.out.println("test");
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.println("Error with draw");
+        }
+    }
+    public void drawRectangle ( GraphicsContext graphicsContext, ColorPicker colorPicker) {
+
+        try {
+            graphicsContext.setFill(colorPicker.getValue());
+            graphicsContext.fillRect(getMouseX() , getMouseY() , 100, 100);
+        } catch (Exception e) {
+            System.out.println("Error with draw");
         }
     }
 }
