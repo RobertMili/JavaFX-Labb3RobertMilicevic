@@ -1,6 +1,7 @@
 package com.example.labb3;
 
 import com.example.labb3.Shapes.Cirkel;
+import com.example.labb3.Shapes.Position;
 import com.example.labb3.Shapes.Rectangle;
 import com.example.labb3.Shapes.Shape;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,18 +19,19 @@ public class Model {
 
     private double mouseX;
     private double mouseY;
-    private int size = 100;
+    private final int size = 50;
 
     List<Shape> shape = new ArrayList<>();
 
     public Rectangle rectangle;
     public Cirkel cirkel; //This connect
-    private StringProperty shapeSize;
-
+    private final StringProperty shapeSize;
     Shape shapeClass;
+    Position position;
 
     public Model() {
-        this.shapeSize = new SimpleStringProperty("20");
+        this.shapeSize = new SimpleStringProperty("50");
+
     }
 
     public double getMouseX() {
@@ -54,6 +56,14 @@ public class Model {
 
     public void setRectangle(Rectangle rectangle) {
         this.rectangle = rectangle;
+    }
+
+    public Cirkel getCirkel() {
+        return cirkel;
+    }
+
+    public void setCirkel(Cirkel cirkel) {
+        this.cirkel = cirkel;
     }
 
     public void drawCirkel(GraphicsContext graphicsContext, ColorPicker colorPicker) {
@@ -86,10 +96,12 @@ public class Model {
         return shapeSize.get();
     }
     public Double getShapeSizeAsDouble() {
-
-            double shapeSize = Double.parseDouble(getShapeSize());
-            return shapeSize;
-
+        try {
+            return Double.parseDouble(getShapeSize());
+        } catch (Exception e) {
+            System.out.println("Please write a number.");
+        }
+        return null;
     }
     public StringProperty shapeSizeProperty() {
         return shapeSize;
@@ -102,6 +114,7 @@ public class Model {
     public void changeSizeOnSelectedShapes() {
        shapeClass.setSize(getShapeSizeAsDouble());
     }
+
     /*
      public void deleteSelectedShapes() {
         addToUndoDeque();

@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
-public class Rectangle extends Shape {
+public class Rectangle extends Shape  {
 
 
     public Rectangle(Position position, Color color, double size) {

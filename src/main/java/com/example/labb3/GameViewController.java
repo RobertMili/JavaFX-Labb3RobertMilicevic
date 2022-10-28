@@ -2,6 +2,7 @@ package com.example.labb3;
 
 import com.example.labb3.Shapes.*;
 
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -31,20 +32,30 @@ public class GameViewController {
     TextField firstValue = new TextField();
 
     Cirkel cirkel;
+    Position position;
 
-    //ToDo size of shape
-    //Delete button
-    //Save objects
+    //Todo Factory eller Builder pattern
+    //TOdo Utritning av nya shapes ska ske genom att klicka med musen där objektet ska ritas ut. // if is click on button draw or nothing
+    //Todo Redan utritade objekt ska kunna väljas genom att gå över i select mode och klicka på skärmen.
+    /*
+    Redan utritade objekt ska kunna väljas genom att gå över i select mode och klicka på skärmen.
+    Använd musens koordinater för att leta upp det objekt du klickat på.
+    Tips! Implementera en metod på dina shapes för att fråga om koordinaterna är inom shapens area.
+     */
+    // Mouse position to record class
+    //todo Undo button kolla på slide
+    //todo Save objects - export av ritade objekt ska kunna ske som svg-format
+    //Todo test
 
     public void initialize() {
         graphicsContext = canvas.getGraphicsContext2D();
         sizeTextField.textProperty().bindBidirectional(model.shapeSizeProperty());
+
     }
 
     public void onCirkelClicked(ActionEvent actionEvent) {
 
         model.drawCirkel(graphicsContext,colorPicked);
-
     }
 
     public void onRectangleClicked(ActionEvent actionEvent) {
@@ -58,7 +69,7 @@ public class GameViewController {
         model.setMouseX(mouseEvent.getX());
         model.setMouseY(mouseEvent.getY());
 
-        }
+    }
 
     public void sizeTextField(ActionEvent actionEvent) {
 

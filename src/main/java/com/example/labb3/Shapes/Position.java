@@ -1,4 +1,12 @@
 package com.example.labb3.Shapes;
 
-public record Position(double x, double y ) {
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+
+import java.util.Objects;
+
+public record Position(double x, double y) {
+
+
+
 }
