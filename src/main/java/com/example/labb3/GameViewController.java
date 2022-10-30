@@ -56,30 +56,12 @@ public class GameViewController {
 
     }
 
-    public void onCirkelClicked(ActionEvent actionEvent) {
-
-
-       // model.addCirkelToList(graphicsContext, colorPicked);
-        // model.drawCirkel(graphicsContext,colorPicked);
-        //model.testCirkel(graphicsContext,colorPicked);
-    }
-
-    public void onRectangleClicked(ActionEvent actionEvent) {
-
-        //model.drawRectangle(graphicsContext,colorPicked);
-        //model.addRectangleTolist(graphicsContext, colorPicked);
-    }
 
     public void canvasClicked(MouseEvent mouseEvent) {
 
         model.setMouseX(mouseEvent.getX());
         model.setMouseY(mouseEvent.getY());
-//        if (cirkelButton.isSelected()) {
-//            model.addCirkelToList(graphicsContext,colorPicked);
-//        } else if (rectangleButton.isSelected()) {
-//            model.addRectangleTolist(graphicsContext,colorPicked);
-//        }
-        model.test(cirkelButton,rectangleButton,graphicsContext,colorPicked);
+        model.choiceButton(cirkelButton,rectangleButton,graphicsContext,colorPicked);
 
     }
 

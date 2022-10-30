@@ -4,12 +4,9 @@ import com.example.labb3.Shapes.Cirkel;
 import com.example.labb3.Shapes.Position;
 import com.example.labb3.Shapes.Rectangle;
 import com.example.labb3.Shapes.Shape;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ToggleButton;
 
@@ -29,7 +26,6 @@ public class Model {
     private final StringProperty shapeSize;
     Shape shapeClass;
     Position position = new Position(getMouseX(), getMouseY());
-
 
 
     public Model() {
@@ -74,7 +70,7 @@ public class Model {
 
         try {
             graphicsContext.setFill(colorPicker.getValue());
-            graphicsContext.fillOval(getMouseX() - size / 2, getMouseY() - size / 2, getShapeSizeAsDouble(), getShapeSizeAsDouble());
+            graphicsContext.fillOval(getMouseX() - (double)size / 2, getMouseY() - (double)size / 2, getShapeSizeAsDouble(), getShapeSizeAsDouble());
 
         } catch (Exception e) {
             System.out.println("Error with draw");
@@ -92,14 +88,14 @@ public class Model {
 
         try {
             graphicsContext.setFill(colorPicker.getValue());
-            graphicsContext.fillRect(getMouseX() - size / 2, getMouseY() - size / 2, getShapeSizeAsDouble(), getShapeSizeAsDouble());
+            graphicsContext.fillRect(getMouseX() - (double)size / 2, getMouseY() - (double)size / 2, getShapeSizeAsDouble(), getShapeSizeAsDouble());
         } catch (Exception e) {
             System.out.println("Error with draw");
         }
         return null;
     }
 
-    public Boolean addRectangleTolist(GraphicsContext graphicsContext, ColorPicker colorPicker) {
+    public Boolean addRectangleToList(GraphicsContext graphicsContext, ColorPicker colorPicker) {
         shapeList.add(drawRectangle(graphicsContext, colorPicker));
 
         return null;
@@ -139,22 +135,21 @@ public class Model {
 
     }
 
-    public void testMouse() {
-        System.out.println("second class" + position.x());
-    }
 
-    public void test(ToggleButton cirkelButton,ToggleButton rectangelButton, GraphicsContext graphicsContext, ColorPicker colorPicker) {
-        if (cirkelButton.isSelected()) {
+    public void choiceButton(ToggleButton cirkelButton, ToggleButton rectangleButton, GraphicsContext graphicsContext, ColorPicker colorPicker) {
+        if (cirkelButton.isSelected() && !rectangleButton.isSelected()) {
+
             addCirkelToList(graphicsContext, colorPicker);
 
 
-        } else if (rectangelButton.isSelected()) {
-            drawRectangle(graphicsContext, colorPicker);
+        } else if (rectangleButton.isSelected() && !cirkelButton.isSelected()) {
 
+            addRectangleToList(graphicsContext,colorPicker);
 
         }
     }
 }
+
 
 
 
