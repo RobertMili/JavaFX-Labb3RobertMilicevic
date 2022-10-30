@@ -16,7 +16,15 @@ public class Cirkel extends Shape {
     public Shape copyOf() {
         return null;
     }
+    public void testDraw(GraphicsContext graphicsContext,ColorPicker colorPicker, double mouse, double size){
+        try {
+            //graphicsContext.setFill(colorPicker.getValue());
+           graphicsContext.fillOval(mouse , mouse, size, size);
 
+        } catch (Exception e) {
+            System.out.println("Error with draw");
+        }
+    }
 
 }
 

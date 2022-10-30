@@ -2,32 +2,33 @@ package com.example.labb3;
 
 import com.example.labb3.Shapes.*;
 
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 public class GameViewController {
 
-    public Button cirkelButton;
+
     public Canvas canvas;
     public GraphicsContext graphicsContext;
 
     public Model model = new Model();
-    public Button rectangleButton;
+
     public ColorPicker colorPicked;
 
     public Button deleteButton = new Button();
+
     public Button changeSizeButton;
     public TextField sizeTextField;
+
     public Cirkel cirkelClass;
+    public ToggleButton rectangleButton;
+    public ToggleButton cirkelButton;
 
     TextField firstValue = new TextField();
 
@@ -57,42 +58,37 @@ public class GameViewController {
 
     public void onCirkelClicked(ActionEvent actionEvent) {
 
-        model.drawCirkel(graphicsContext,colorPicked);
 
-
+       // model.addCirkelToList(graphicsContext, colorPicked);
+        // model.drawCirkel(graphicsContext,colorPicked);
+        //model.testCirkel(graphicsContext,colorPicked);
     }
 
     public void onRectangleClicked(ActionEvent actionEvent) {
 
-        model.drawRectangle(graphicsContext,colorPicked);
-        model.addShapeToList(graphicsContext,colorPicked);
+        //model.drawRectangle(graphicsContext,colorPicked);
+        //model.addRectangleTolist(graphicsContext, colorPicked);
     }
 
     public void canvasClicked(MouseEvent mouseEvent) {
 
         model.setMouseX(mouseEvent.getX());
         model.setMouseY(mouseEvent.getY());
-
+//        if (cirkelButton.isSelected()) {
+//            model.addCirkelToList(graphicsContext,colorPicked);
+//        } else if (rectangleButton.isSelected()) {
+//            model.addRectangleTolist(graphicsContext,colorPicked);
+//        }
+        model.test(cirkelButton,rectangleButton,graphicsContext,colorPicked);
 
     }
 
     public void sizeTextField(ActionEvent actionEvent) {
-
-
-//        String test = "";
-//
-//        System.out.println("asdas");
-//        int value = Integer.parseInt(firstValue.getText());
-//        firstValue.setText(test);
-//
-//        System.out.println("This is a integer: " + value);
-//        System.out.println("This is a String " +test);
-    }
-
-    public void changeSizeButton(ActionEvent actionEvent) {
-        model.changeSizeOnSelectedShapes();
     }
 }
+
+
+
 /*
     Trying to do deleteButton
      public void deleteButton(ActionEvent actionEvent) {
