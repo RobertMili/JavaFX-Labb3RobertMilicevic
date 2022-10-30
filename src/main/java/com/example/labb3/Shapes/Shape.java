@@ -11,6 +11,7 @@ import java.util.Objects;
 
 public abstract class Shape  {
 
+
     private Position position;
     private Color color;
 

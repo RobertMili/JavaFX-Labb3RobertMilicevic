@@ -27,10 +27,12 @@ public class Model {
     public Cirkel cirkel; //This connect
     private final StringProperty shapeSize;
     Shape shapeClass;
-    Position position;
+    Position position = new Position(getMouseX(),getMouseY());
+
 
     public Model() {
         this.shapeSize = new SimpleStringProperty("50");
+
 
     }
 
@@ -113,6 +115,17 @@ public class Model {
 
     public void changeSizeOnSelectedShapes() {
        shapeClass.setSize(getShapeSizeAsDouble());
+    }
+    public void setMouse(){
+        this.position = new Position(getMouseX(),getMouseY());
+        System.out.println(position);
+
+        System.out.println("this is x  " + position.x());
+        System.out.println("this is y " + position.y());
+
+    }
+    public void testMouse(){
+        System.out.println("second class" + position.x());
     }
 
     /*

@@ -33,6 +33,8 @@ public class GameViewController {
 
     Cirkel cirkel;
     Position position;
+    Shape shapeClass;
+
 
     //Todo Factory eller Builder pattern
     //TOdo Utritning av nya shapes ska ske genom att klicka med musen där objektet ska ritas ut. // if is click on button draw or nothing
@@ -56,11 +58,13 @@ public class GameViewController {
     public void onCirkelClicked(ActionEvent actionEvent) {
 
         model.drawCirkel(graphicsContext,colorPicked);
+
+
     }
 
     public void onRectangleClicked(ActionEvent actionEvent) {
 
-        //model.drawRectangle(graphicsContext,colorPicked);
+        model.drawRectangle(graphicsContext,colorPicked);
         model.addShapeToList(graphicsContext,colorPicked);
     }
 
@@ -68,6 +72,7 @@ public class GameViewController {
 
         model.setMouseX(mouseEvent.getX());
         model.setMouseY(mouseEvent.getY());
+
 
     }
 
