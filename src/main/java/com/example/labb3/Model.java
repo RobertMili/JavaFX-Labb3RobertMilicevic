@@ -210,9 +210,7 @@ public class Model {
 
     public void undo(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 
-        for (var s : shapeList2) {
-            s.draw(graphicsContext,colorPicker);
-        }
+
     }
 
 

@@ -56,9 +56,7 @@ public class Shape  {
     public void setSize(double size) {
         this.size = size;
     }
-    public void draw(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 
-    }
 
     @Override
     public String toString() {

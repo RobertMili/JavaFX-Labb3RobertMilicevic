@@ -84,10 +84,16 @@ public class GameViewController {
         GraphicsContext context = canvas.getGraphicsContext2D();
         model.shapeList2.remove(model.shapeList2.size() - 1);
         context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-       model.undo(graphicsContext,colorPicked);
+        draw(graphicsContext);
     }
 
+    public void draw(GraphicsContext graphicsContext) {
+        System.out.println("test!");
+        for (var shape : model.shapeList2) {
 
+        }
+        System.out.println("test2");
+    }
 }
 
 
