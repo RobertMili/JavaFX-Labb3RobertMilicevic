@@ -7,12 +7,7 @@ import javafx.scene.paint.Color;
 public class Rectangle extends Shape  {
 
 
-    public Rectangle(Position position, Color color, double size) {
-        super(position, color, size);
+    public Rectangle(double mouseX, double mouseY, ColorPicker color, double size) {
+        super(mouseX, mouseY, color, size);
     }
-
-
-
-
-
 }

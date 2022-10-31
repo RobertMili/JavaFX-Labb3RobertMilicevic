@@ -12,30 +12,40 @@ import java.util.Objects;
 public class Shape  {
 
 
-    private Position position;
-    private Color color;
+    private double mouseX;
+    private double mouseY;
+    private ColorPicker color;
 
     private double size;
 
-    public Shape(Position position, Color color, double size) {
-        this.position = position;
+    public Shape(double mouseX, double mouseY, ColorPicker color, double size) {
+        this.mouseX = mouseX;
+        this.mouseY = mouseY;
         this.color = color;
         this.size = size;
     }
 
-    public Position getPosition() {
-        return position;
+    public double getMouseX() {
+        return mouseX;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setMouseX(double mouseX) {
+        this.mouseX = mouseX;
     }
 
-    public Color getColor() {
+    public double getMouseY() {
+        return mouseY;
+    }
+
+    public void setMouseY(double mouseY) {
+        this.mouseY = mouseY;
+    }
+
+    public ColorPicker getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(ColorPicker color) {
         this.color = color;
     }
 
@@ -46,9 +56,17 @@ public class Shape  {
     public void setSize(double size) {
         this.size = size;
     }
+    public void draw(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 
+    }
 
-    //public abstract Shape copyOf();
-
-
+    @Override
+    public String toString() {
+        return "Shape{" +
+                "mouseX=" + mouseX +
+                ", mouseY=" + mouseY +
+                ", color=" + color +
+                ", size=" + size +
+                '}';
+    }
 }

@@ -8,12 +8,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class Model {
@@ -30,11 +38,20 @@ public class Model {
     private final StringProperty shapeSize;
     Shape shapeClass;
     Position position = new Position(getMouseX(), getMouseY());
+    public Stage stage;
+    private Deque<Shape> undo;
 
+    public ObservableList<Shape> getShapeList2() {
+        return shapeList2;
+    }
+
+    public void setShapeList2(ObservableList<Shape> shapeList2) {
+        this.shapeList2 = shapeList2;
+    }
 
     public Model() {
         this.shapeSize = new SimpleStringProperty("50");
-
+        this.undo = new ArrayDeque<>();
 
     }
 
@@ -82,12 +99,6 @@ public class Model {
         return null;
     }
 
-    public Boolean addCirkelToList(GraphicsContext graphicsContext, ColorPicker colorPicker) {
-        return shapeList2.add(drawCirkel(graphicsContext, colorPicker));
-
-
-    }
-
     public Shape drawRectangle(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 
         try {
@@ -99,11 +110,7 @@ public class Model {
         return null;
     }
 
-    public Boolean addRectangleToList(GraphicsContext graphicsContext, ColorPicker colorPicker) {
-        shapeList2.add(drawRectangle(graphicsContext, colorPicker));
 
-        return null;
-    }
 
     public String getShapeSize() {
         return shapeSize.get();
@@ -144,28 +151,73 @@ public class Model {
     public void choiceButton(ToggleButton cirkelButton, ToggleButton rectangleButton, GraphicsContext graphicsContext, ColorPicker colorPicker) {
         if (cirkelButton.isSelected() && !rectangleButton.isSelected()) {
 
-            addCirkelToList(graphicsContext, colorPicker);
-
+            drawCirkel(graphicsContext,colorPicker);
+            creatingShape(colorPicker);
 
         } else if (rectangleButton.isSelected() && !cirkelButton.isSelected()) {
 
-            addRectangleToList(graphicsContext,colorPicker);
+            drawRectangle(graphicsContext,colorPicker);
+            creatingShape(colorPicker);
         }
     }
-    public void testList() {
-        System.out.println(shapeList.toString());
-        System.out.println(shapeList.stream().toList());
-    }
 
-    public void testAddingShapeToList() {
-        var product = new Shape(new Position(getMouseX(),getMouseY()), Color.AQUA, getShapeSizeAsDouble());
+    public void creatingShape(ColorPicker colorPicker) {
+        var shapeToList = new Shape(getMouseX(),getMouseY(),colorPicker, getShapeSizeAsDouble());
 
-        shapeList2.add(product);
+        shapeList2.add(shapeToList);
 
         System.out.println(shapeList2.toString());
 
     }
-}
+    public void onSaveAction() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save as");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().clear();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
+
+        File filePath = fileChooser.showSaveDialog(stage);
+
+        if( filePath != null)
+        saveToFile(filePath.toPath());
+    }
+    public void saveToFile(Path file) {
+        StringBuilder outPut = new StringBuilder();
+        for (Shape p : shapeList2) {
+            outPut.append(p.getMouseX());
+            outPut.append(",");
+            outPut.append(p.getMouseY());
+            outPut.append(",");
+            outPut.append(p.getColor());
+            outPut.append(",");
+            outPut.append(p.getSize());
+            outPut.append("\n");
+        }
+        try {
+            Files.writeString(file, outPut.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void onAddAction(ActionEvent actionEvent,ColorPicker colorPicker) {
+        creatingShape(colorPicker);
+    }
+
+
+    public void undo(GraphicsContext graphicsContext, ColorPicker colorPicker) {
+
+        for (var s : shapeList2) {
+            s.draw(graphicsContext,colorPicker);
+        }
+    }
+
+
+
+    }
 
 
 

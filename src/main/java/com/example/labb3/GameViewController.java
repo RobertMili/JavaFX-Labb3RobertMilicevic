@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 
+import java.nio.file.Path;
+
 public class GameViewController {
 
 
@@ -31,6 +33,7 @@ public class GameViewController {
     public ToggleButton cirkelButton;
 
     TextField firstValue = new TextField();
+    Path file;
 
     Cirkel cirkel;
     Position position;
@@ -45,7 +48,7 @@ public class GameViewController {
      */
     // Mouse position to record class
     //todo Undo button kolla på slide
-    //todo Save objects - export av ritade objekt ska kunna ske som svg-format
+    //Todo Save objects - export av ritade objekt ska kunna ske som svg-format
     //Todo test
 
     public void initialize() {
@@ -59,16 +62,33 @@ public class GameViewController {
 
         model.setMouseX(mouseEvent.getX());
         model.setMouseY(mouseEvent.getY());
-        model.choiceButton(cirkelButton,rectangleButton,graphicsContext,colorPicked);
-        model.testList();
-        model.testAddingShapeToList();
+        model.choiceButton(cirkelButton, rectangleButton, graphicsContext, colorPicked);
+
 
     }
 
     public void sizeTextField(ActionEvent actionEvent) {
     }
-}
 
+    public void cirkelButton(ActionEvent actionEvent) {
+
+    }
+
+    public void saveButton(ActionEvent actionEvent) {
+        model.creatingShape(colorPicked);
+        model.onSaveAction();
+
+    }
+
+    public void undoButton(ActionEvent actionEvent) {
+        GraphicsContext context = canvas.getGraphicsContext2D();
+        model.shapeList2.remove(model.shapeList2.size() - 1);
+        context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+       model.undo(graphicsContext,colorPicked);
+    }
+
+
+}
 
 
 /*

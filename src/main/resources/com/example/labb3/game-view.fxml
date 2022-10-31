@@ -7,18 +7,20 @@
 <AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labb3.GameViewController">
    <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="500.0">
       <children>
-         <ToggleButton  mnemonicParsing="false" text="Cirkel"        fx:id="cirkelButton"/>
-         <ToggleButton mnemonicParsing="false" text="Rectangle"      fx:id="rectangleButton" />
+         <ToggleButton fx:id="cirkelButton" mnemonicParsing="false" onAction="#cirkelButton" text="Cirkel" />
+         <ToggleButton fx:id="rectangleButton" mnemonicParsing="false" text="Rectangle" />
          <ColorPicker fx:id="colorPicked" />
-         <Button mnemonicParsing="false" text="Undo" />
          <TextField fx:id="sizeTextField" onAction="#sizeTextField" prefHeight="25.0" prefWidth="76.0" />
+
+         <Button mnemonicParsing="false" text="Undo" onAction="#undoButton"/>
+         <Button  mnemonicParsing="false" onAction="#saveButton" text="Save" />
 
 
       </children>
    </HBox>
    <Pane layoutX="-1.0" layoutY="46.0" prefHeight="633.0" prefWidth="690.0">
       <children>
-         <Canvas fx:id="canvas" height="643.0" width="690.0" layoutX="11.0" layoutY="4.0" onMouseClicked="#canvasClicked"  BorderPane.alignment="TOP_LEFT" />
+         <Canvas fx:id="canvas" height="643.0" layoutX="11.0" layoutY="4.0" onMouseClicked="#canvasClicked" width="690.0" BorderPane.alignment="TOP_LEFT" />
       </children>
    </Pane>
 </AnchorPane>
