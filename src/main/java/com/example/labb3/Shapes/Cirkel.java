@@ -12,10 +12,7 @@ public class Cirkel extends Shape {
         super(position, color, size);
     }
 
-    @Override
-    public Shape copyOf() {
-        return null;
-    }
+
     public void testDraw(GraphicsContext graphicsContext,ColorPicker colorPicker, double mouse, double size){
         try {
             //graphicsContext.setFill(colorPicker.getValue());

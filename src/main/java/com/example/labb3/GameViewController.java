@@ -37,8 +37,6 @@ public class GameViewController {
     Shape shapeClass;
 
 
-    //Todo Factory eller Builder pattern
-    //TOdo Utritning av nya shapes ska ske genom att klicka med musen där objektet ska ritas ut. // if is click on button draw or nothing
     //Todo Redan utritade objekt ska kunna väljas genom att gå över i select mode och klicka på skärmen.
     /*
     Redan utritade objekt ska kunna väljas genom att gå över i select mode och klicka på skärmen.
@@ -62,6 +60,8 @@ public class GameViewController {
         model.setMouseX(mouseEvent.getX());
         model.setMouseY(mouseEvent.getY());
         model.choiceButton(cirkelButton,rectangleButton,graphicsContext,colorPicked);
+        model.testList();
+        model.testAddingShapeToList();
 
     }
 

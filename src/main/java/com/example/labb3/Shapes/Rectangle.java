@@ -11,10 +11,6 @@ public class Rectangle extends Shape  {
         super(position, color, size);
     }
 
-    @Override
-    public Shape copyOf() {
-        return null;
-    }
 
 
 

@@ -6,9 +6,12 @@ import com.example.labb3.Shapes.Rectangle;
 import com.example.labb3.Shapes.Shape;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ public class Model {
     private final int size = 50;
 
     List<Shape> shapeList = new ArrayList<>();
+    ObservableList<Shape> shapeList2 =  FXCollections.observableArrayList();
 
     public Rectangle rectangle;
     public Cirkel cirkel; //This connect
@@ -79,9 +83,9 @@ public class Model {
     }
 
     public Boolean addCirkelToList(GraphicsContext graphicsContext, ColorPicker colorPicker) {
-        return shapeList.add(drawCirkel(graphicsContext, colorPicker));
+        return shapeList2.add(drawCirkel(graphicsContext, colorPicker));
 
-        //System.out.println(shapeList.toString());
+
     }
 
     public Shape drawRectangle(GraphicsContext graphicsContext, ColorPicker colorPicker) {
@@ -96,7 +100,7 @@ public class Model {
     }
 
     public Boolean addRectangleToList(GraphicsContext graphicsContext, ColorPicker colorPicker) {
-        shapeList.add(drawRectangle(graphicsContext, colorPicker));
+        shapeList2.add(drawRectangle(graphicsContext, colorPicker));
 
         return null;
     }
@@ -122,8 +126,9 @@ public class Model {
         this.shapeSize.set(shapeSize);
     }
 
-    public void changeSizeOnSelectedShapes() {
+    public double changeSizeOnSelectedShapes() {
         shapeClass.setSize(getShapeSizeAsDouble());
+        return 0;
     }
 
     public void setMouse() {
@@ -145,8 +150,20 @@ public class Model {
         } else if (rectangleButton.isSelected() && !cirkelButton.isSelected()) {
 
             addRectangleToList(graphicsContext,colorPicker);
-
         }
+    }
+    public void testList() {
+        System.out.println(shapeList.toString());
+        System.out.println(shapeList.stream().toList());
+    }
+
+    public void testAddingShapeToList() {
+        var product = new Shape(new Position(getMouseX(),getMouseY()), Color.AQUA, getShapeSizeAsDouble());
+
+        shapeList2.add(product);
+
+        System.out.println(shapeList2.toString());
+
     }
 }
 

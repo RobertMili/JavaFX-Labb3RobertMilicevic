@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
-public abstract class Shape  {
+public class Shape  {
 
 
     private Position position;
@@ -48,7 +48,7 @@ public abstract class Shape  {
     }
 
 
-    public abstract Shape copyOf();
+    //public abstract Shape copyOf();
 
 
 }
