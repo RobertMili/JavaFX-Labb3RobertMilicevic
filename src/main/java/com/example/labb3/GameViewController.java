@@ -2,8 +2,6 @@ package com.example.labb3;
 
 import com.example.labb3.Shapes.*;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -38,7 +36,7 @@ public class GameViewController {
     Cirkel cirkel;
     Position position;
     Shape shapeClass;
-    ObservableList<ShapeType>shapeTypesList = FXCollections.observableArrayList(ShapeType.values());
+   // ObservableList<ShapeType>shapeTypesList = FXCollections.observableArrayList(ShapeType.values());
 
 
     //Todo Redan utritade objekt ska kunna väljas genom att gå över i select mode och klicka på skärmen.
@@ -56,24 +54,26 @@ public class GameViewController {
         graphicsContext = canvas.getGraphicsContext2D();
         sizeTextField.textProperty().bindBidirectional(model.shapeSizeProperty());
 
-        choiceBox.setItems(shapeTypesList);
+        choiceBox.setItems(model.shapeTypesList);
         choiceBox.setValue(ShapeType.CIRCLE);
-        //choiceBox.valueProperty() bind it with Model this Martins tips
+
+        colorPicked.valueProperty().bindBidirectional(model.colorPickerTestProperty());
+
+       //choiceBox.valueProperty().bindBidirectional(choiceBox.valueProperty());    //bind it with Model this Martins tips
 
     }
 
 
     public void canvasClicked(MouseEvent mouseEvent) {
 //
-//       model.setMouseX(mouseEvent.getX());
-//        model.setMouseY(mouseEvent.getY());
-//        model.choiceButton(cirkelButton, rectangleButton, graphicsContext, colorPicked);
+       model.setMouseX(mouseEvent.getX());
+       model.setMouseY(mouseEvent.getY());
+       model.choiceButton(cirkelButton,rectangleButton,graphicsContext);
 
 
-
-        shapeClass = Shape.createShape( choiceBox.getValue(), mouseEvent.getX(), mouseEvent.getY(),graphicsContext,colorPicked);// den ska byggas i model.
-        System.out.println(shapeClass);
-
+        //model.creatObjekt(graphicsContext);
+        //shapeClass = Shape.createShape( choiceBox.getValue(), mouseEvent.getX(), mouseEvent.getY(),graphicsContext);// den ska byggas i model.
+        //System.out.println(shapeClass);
     }
 
     public void sizeTextField(ActionEvent actionEvent) {

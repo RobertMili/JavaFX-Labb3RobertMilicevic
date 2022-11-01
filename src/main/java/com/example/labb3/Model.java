@@ -1,14 +1,15 @@
 package com.example.labb3;
 
 import com.example.labb3.Shapes.*;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -30,26 +31,53 @@ public class Model {
     List<Shape> shapeList = new ArrayList<>();
     ObservableList<Shape> shapeList2 =  FXCollections.observableArrayList();
 
+
+    ObservableList<ShapeType>shapeTypesList = FXCollections.observableArrayList(ShapeType.values());
+
     public Rectangle rectangle;
     public Cirkel cirkel; //This connect
     private final StringProperty shapeSize;
+
+    private  ObjectProperty<Color> colorPickerTest;
+
+
     Shape shapeClass;
     Position position = new Position(getMouseX(), getMouseY());
     public Stage stage;
     private Deque<Shape> undo;
 
-    public ObservableList<Shape> getShapeList2() {
-        return shapeList2;
-    }
+    GameViewController controller;
+    public Property<ShapeType> choiceBox;
 
-    public void setShapeList2(ObservableList<Shape> shapeList2) {
-        this.shapeList2 = shapeList2;
-    }
+
+
+
+
+//    public ObservableList<Shape> getShapeList2() {
+//        return shapeList2;
+//    }
+//
+//    public void setShapeList2(ObservableList<Shape> shapeList2) {
+//        this.shapeList2 = shapeList2;
+//    }
 
     public Model() {
         this.shapeSize = new SimpleStringProperty("50");
         this.undo = new ArrayDeque<>();
+        this.colorPickerTest = new SimpleObjectProperty<>(Color.WHITE);
 
+    }
+
+    public Color getColorPickerTest() {
+        return colorPickerTest.get();
+    }
+
+    public ObjectProperty<Color> colorPickerTestProperty() {
+        return colorPickerTest;
+    }
+
+    public void setColorPickerTest(Color colorPickerTest) {
+        this.colorPickerTest.set(colorPickerTest);
     }
 
     public double getMouseX() {
@@ -83,30 +111,6 @@ public class Model {
     public void setCirkel(Cirkel cirkel) {
         this.cirkel = cirkel;
     }
-
-    public Shape drawCirkel(GraphicsContext graphicsContext, ColorPicker colorPicker) {
-
-        try {
-            graphicsContext.setFill(colorPicker.getValue());
-            graphicsContext.fillOval(getMouseX() - (double)size / 2, getMouseY() - (double)size / 2, getShapeSizeAsDouble(), getShapeSizeAsDouble());
-
-        } catch (Exception e) {
-            System.out.println("Error with draw");
-        }
-        return null;
-    }
-
-    public Shape drawRectangle(GraphicsContext graphicsContext, ColorPicker colorPicker) {
-
-        try {
-            graphicsContext.setFill(colorPicker.getValue());
-            graphicsContext.fillRect(getMouseX() - (double)size / 2, getMouseY() - (double)size / 2, getShapeSizeAsDouble(), getShapeSizeAsDouble());
-        } catch (Exception e) {
-            System.out.println("Error with draw");
-        }
-        return null;
-    }
-
 
 
     public String getShapeSize() {
@@ -145,28 +149,39 @@ public class Model {
     }
 
 
-    public ShapeType choiceButton(ToggleButton cirkelButton, ToggleButton rectangleButton, GraphicsContext graphicsContext, ColorPicker colorPicker) {
+    public Property<ShapeType> choiceButton(ToggleButton cirkelButton, ToggleButton rectangleButton, GraphicsContext graphicsContext ) {
         if (cirkelButton.isSelected() && !rectangleButton.isSelected()) {
 
-            drawCirkel(graphicsContext,colorPicker);
+            shapeClass = Shape.createShape
+                    (shapeTypesList.get(0),
+                            getMouseX() - (double)size / 2,
+                            getMouseY() - (double) size/ 2,
+                            graphicsContext,getShapeSizeAsDouble(),
+                            getColorPickerTest());
+
             //creatingShape(colorPicker);
 
         } else if (rectangleButton.isSelected() && !cirkelButton.isSelected()) {
 
-            drawRectangle(graphicsContext,colorPicker);
-            //creatingShape(colorPicker);
+            shapeClass = Shape.createShape(
+                    shapeTypesList.get(1),
+                    getMouseX() - (double) size /2,
+                    getMouseY() - (double) size/2,
+                    graphicsContext,getShapeSizeAsDouble(),
+                    getColorPickerTest());
+
         }
         return null;
     }
 
-//    public void creatingShape(ColorPicker colorPicker) {
+    public void creatingShape(ColorPicker colorPicker) {
 //        var shapeToList = new Shape(getMouseX(),getMouseY(),colorPicker, getShapeSizeAsDouble());
 //
 //        shapeList2.add(shapeToList);
 //
 //        System.out.println(shapeList2.toString());
-//
-//    }
+
+    }
     public void onSaveAction() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save as");
@@ -207,16 +222,38 @@ public class Model {
         this.stage = stage;
     }
 
-//    public void onAddAction(ActionEvent actionEvent,ColorPicker colorPicker) {
-//        creatingShape(colorPicker);
-//    }
-//
+    public void onAddAction(ActionEvent actionEvent,ColorPicker colorPicker) {
+        creatingShape(colorPicker);
+    }
+
 
     public void undo(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 
 
     }
+    public Shape drawCirkel(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 
+        try {
+            graphicsContext.setFill(colorPicker.getValue());
+            graphicsContext.fillOval(getMouseX() - (double)size / 2, getMouseY() - (double)size / 2, getShapeSizeAsDouble(), getShapeSizeAsDouble());
+
+        } catch (Exception e) {
+            System.out.println("Error with draw");
+        }
+        return null;
+    }
+
+    public Shape drawRectangle(GraphicsContext graphicsContext, ColorPicker colorPicker) {
+
+        try {
+            graphicsContext.setFill(colorPicker.getValue());
+            graphicsContext.fillRect(getMouseX() - (double)size / 2, getMouseY() - (double)size / 2, getShapeSizeAsDouble(), getShapeSizeAsDouble());
+        } catch (Exception e) {
+            System.out.println("Error with draw");
+        }
+        return null;
+    }
+//
 
 
     }
