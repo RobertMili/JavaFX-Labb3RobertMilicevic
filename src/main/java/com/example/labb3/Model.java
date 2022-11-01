@@ -1,9 +1,6 @@
 package com.example.labb3;
 
-import com.example.labb3.Shapes.Cirkel;
-import com.example.labb3.Shapes.Position;
-import com.example.labb3.Shapes.Rectangle;
-import com.example.labb3.Shapes.Shape;
+import com.example.labb3.Shapes.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -133,10 +130,10 @@ public class Model {
         this.shapeSize.set(shapeSize);
     }
 
-    public double changeSizeOnSelectedShapes() {
-        shapeClass.setSize(getShapeSizeAsDouble());
-        return 0;
-    }
+//    public double changeSizeOnSelectedShapes() {
+//        shapeClass.setSize(getShapeSizeAsDouble());
+//        return 0;
+//    }
 
     public void setMouse() {
         this.position = new Position(getMouseX(), getMouseY());
@@ -148,27 +145,28 @@ public class Model {
     }
 
 
-    public void choiceButton(ToggleButton cirkelButton, ToggleButton rectangleButton, GraphicsContext graphicsContext, ColorPicker colorPicker) {
+    public ShapeType choiceButton(ToggleButton cirkelButton, ToggleButton rectangleButton, GraphicsContext graphicsContext, ColorPicker colorPicker) {
         if (cirkelButton.isSelected() && !rectangleButton.isSelected()) {
 
             drawCirkel(graphicsContext,colorPicker);
-            creatingShape(colorPicker);
+            //creatingShape(colorPicker);
 
         } else if (rectangleButton.isSelected() && !cirkelButton.isSelected()) {
 
             drawRectangle(graphicsContext,colorPicker);
-            creatingShape(colorPicker);
+            //creatingShape(colorPicker);
         }
+        return null;
     }
 
-    public void creatingShape(ColorPicker colorPicker) {
-        var shapeToList = new Shape(getMouseX(),getMouseY(),colorPicker, getShapeSizeAsDouble());
-
-        shapeList2.add(shapeToList);
-
-        System.out.println(shapeList2.toString());
-
-    }
+//    public void creatingShape(ColorPicker colorPicker) {
+//        var shapeToList = new Shape(getMouseX(),getMouseY(),colorPicker, getShapeSizeAsDouble());
+//
+//        shapeList2.add(shapeToList);
+//
+//        System.out.println(shapeList2.toString());
+//
+//    }
     public void onSaveAction() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save as");
@@ -183,16 +181,22 @@ public class Model {
     }
     public void saveToFile(Path file) {
         StringBuilder outPut = new StringBuilder();
+        List<String> list = new ArrayList();
+        list.add("<svg width=\"1540.0\" height=\"740.0\" xmlns=\"http://www.w3.org/2000/svg/\" version=\"1.1\">");
+
         for (Shape p : shapeList2) {
             outPut.append(p.getMouseX());
             outPut.append(",");
             outPut.append(p.getMouseY());
             outPut.append(",");
-            outPut.append(p.getColor());
+            //outPut.append(p.getColor());
             outPut.append(",");
-            outPut.append(p.getSize());
+            //outPut.append(p.getSize());
             outPut.append("\n");
         }
+
+        list.add(String.valueOf(outPut));
+        list.add("</svg>");
         try {
             Files.writeString(file, outPut.toString());
         } catch (IOException e) {
@@ -203,10 +207,10 @@ public class Model {
         this.stage = stage;
     }
 
-    public void onAddAction(ActionEvent actionEvent,ColorPicker colorPicker) {
-        creatingShape(colorPicker);
-    }
-
+//    public void onAddAction(ActionEvent actionEvent,ColorPicker colorPicker) {
+//        creatingShape(colorPicker);
+//    }
+//
 
     public void undo(GraphicsContext graphicsContext, ColorPicker colorPicker) {
 

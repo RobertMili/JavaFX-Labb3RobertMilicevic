@@ -1,32 +1,25 @@
 package com.example.labb3.Shapes;
 
-import com.example.labb3.GameViewController;
-import com.example.labb3.Model;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.paint.Color;
 
 public class Cirkel extends Shape {
 
-
-    public Cirkel(double mouseX, double mouseY, ColorPicker color, double size) {
-        super(mouseX, mouseY, color, size);
+    public Cirkel(double mouseX, double mouseY, ColorPicker colorPicker) {
+        super(mouseX, mouseY, colorPicker);
     }
 
-    public void testDraw(GraphicsContext graphicsContext, ColorPicker colorPicker, double mouse, double size){
+    @Override
+    Shape draw(GraphicsContext graphicsContext) {
         try {
-            //graphicsContext.setFill(colorPicker.getValue());
-           graphicsContext.fillOval(mouse , mouse, size, size);
+            graphicsContext.setFill(getColorPicker().getValue());
+            graphicsContext.fillOval(getMouseX(),getMouseY(),50,50);
 
         } catch (Exception e) {
             System.out.println("Error with draw");
         }
+        return null;
     }
-    public void testMouse() {
-        System.out.println(getMouseY());
-        System.out.println(getMouseX());
-    }
-
 
 }
 

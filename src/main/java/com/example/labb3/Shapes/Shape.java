@@ -1,28 +1,19 @@
 package com.example.labb3.Shapes;
 
-import com.example.labb3.Model;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.paint.Color;
 
-import java.util.Objects;
-
-public class Shape  {
-
+public abstract class Shape  {
 
     private double mouseX;
     private double mouseY;
-    private ColorPicker color;
 
-    private double size;
+    private ColorPicker colorPicker;// set color here
 
-    public Shape(double mouseX, double mouseY, ColorPicker color, double size) {
+    public Shape(double mouseX, double mouseY, ColorPicker colorPicker) {
         this.mouseX = mouseX;
         this.mouseY = mouseY;
-        this.color = color;
-        this.size = size;
+        this.colorPicker = colorPicker;
     }
 
     public double getMouseX() {
@@ -41,30 +32,24 @@ public class Shape  {
         this.mouseY = mouseY;
     }
 
-    public ColorPicker getColor() {
-        return color;
+    public ColorPicker getColorPicker() {
+        return colorPicker;
     }
 
-    public void setColor(ColorPicker color) {
-        this.color = color;
+    public void setColorPicker(ColorPicker colorPicker) {
+        this.colorPicker = colorPicker;
     }
 
-    public double getSize() {
-        return size;
+    public static Shape createShape(ShapeType type, double mouseX, double mouseY, GraphicsContext graphicsContext, ColorPicker colorPicker){
+
+        if (type == ShapeType.CIRCLE) {
+
+            return new Cirkel(mouseX, mouseY,colorPicker).draw(graphicsContext);
+        } else
+            return new Rectangle(mouseX, mouseY,colorPicker).draw(graphicsContext);
+
     }
 
-    public void setSize(double size) {
-        this.size = size;
-    }
 
-
-    @Override
-    public String toString() {
-        return "Shape{" +
-                "mouseX=" + mouseX +
-                ", mouseY=" + mouseY +
-                ", color=" + color +
-                ", size=" + size +
-                '}';
-    }
+    abstract Shape draw(GraphicsContext graphicsContext);
 }

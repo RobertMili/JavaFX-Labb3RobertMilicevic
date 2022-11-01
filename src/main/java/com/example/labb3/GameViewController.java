@@ -2,13 +2,12 @@ package com.example.labb3;
 
 import com.example.labb3.Shapes.*;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.nio.file.Path;
@@ -31,6 +30,7 @@ public class GameViewController {
     public Cirkel cirkelClass;
     public ToggleButton rectangleButton;
     public ToggleButton cirkelButton;
+    public ChoiceBox <ShapeType>choiceBox;
 
     TextField firstValue = new TextField();
     Path file;
@@ -38,6 +38,7 @@ public class GameViewController {
     Cirkel cirkel;
     Position position;
     Shape shapeClass;
+    ObservableList<ShapeType>shapeTypesList = FXCollections.observableArrayList(ShapeType.values());
 
 
     //Todo Redan utritade objekt ska kunna väljas genom att gå över i select mode och klicka på skärmen.
@@ -55,15 +56,23 @@ public class GameViewController {
         graphicsContext = canvas.getGraphicsContext2D();
         sizeTextField.textProperty().bindBidirectional(model.shapeSizeProperty());
 
+        choiceBox.setItems(shapeTypesList);
+        choiceBox.setValue(ShapeType.CIRCLE);
+        //choiceBox.valueProperty() bind it with Model this Martins tips
+
     }
 
 
     public void canvasClicked(MouseEvent mouseEvent) {
+//
+//       model.setMouseX(mouseEvent.getX());
+//        model.setMouseY(mouseEvent.getY());
+//        model.choiceButton(cirkelButton, rectangleButton, graphicsContext, colorPicked);
 
-        model.setMouseX(mouseEvent.getX());
-        model.setMouseY(mouseEvent.getY());
-        model.choiceButton(cirkelButton, rectangleButton, graphicsContext, colorPicked);
 
+
+        shapeClass = Shape.createShape( choiceBox.getValue(), mouseEvent.getX(), mouseEvent.getY(),graphicsContext,colorPicked);// den ska byggas i model.
+        System.out.println(shapeClass);
 
     }
 
@@ -75,7 +84,7 @@ public class GameViewController {
     }
 
     public void saveButton(ActionEvent actionEvent) {
-        model.creatingShape(colorPicked);
+        //model.creatingShape(colorPicked);
         model.onSaveAction();
 
     }

@@ -12,8 +12,8 @@
          <ColorPicker fx:id="colorPicked" />
          <TextField fx:id="sizeTextField" onAction="#sizeTextField" prefHeight="25.0" prefWidth="76.0" />
 
-         <Button mnemonicParsing="false" text="Undo" onAction="#undoButton"/>
-         <Button  mnemonicParsing="false" onAction="#saveButton" text="Save" />
+         <Button mnemonicParsing="false" onAction="#undoButton" text="Undo" />
+         <Button mnemonicParsing="false" onAction="#saveButton" text="Save" />
 
 
       </children>
@@ -23,4 +23,5 @@
          <Canvas fx:id="canvas" height="643.0" layoutX="11.0" layoutY="4.0" onMouseClicked="#canvasClicked" width="690.0" BorderPane.alignment="TOP_LEFT" />
       </children>
    </Pane>
+   <ChoiceBox fx:id="choiceBox" layoutX="531.0" layoutY="8.0" prefWidth="150.0" />
 </AnchorPane>
