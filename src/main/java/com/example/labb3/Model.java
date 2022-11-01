@@ -15,8 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class Model {
@@ -40,14 +39,6 @@ public class Model {
 
         this.colorPicker = new SimpleObjectProperty<>(Color.WHITE);
         this.shapeTypeObjectProperty = new SimpleObjectProperty<>(ShapeType.CIRCLE);
-    }
-
-    public ObservableList<Shape> getShapeList() {
-        return shapeList;
-    }
-
-    public void setShapeList(ObservableList<Shape> shapeList) {
-        this.shapeList = shapeList;
     }
 
     public ObjectProperty<ShapeType> shapeTypeObjectPropertyProperty() {
