@@ -59,5 +59,6 @@ public abstract class Shape  {
     }
 
 
-    abstract Shape draw(GraphicsContext graphicsContext);
+    protected abstract Shape draw(GraphicsContext graphicsContext);
+
 }

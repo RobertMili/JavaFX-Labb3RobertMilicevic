@@ -6,8 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
+import javax.imageio.ImageIO;
+import java.io.File;
 import java.nio.file.Path;
 
 public class GameViewController {
@@ -57,9 +60,9 @@ public class GameViewController {
         choiceBox.setItems(model.shapeTypesList);
         choiceBox.setValue(ShapeType.CIRCLE);
 
-        colorPicked.valueProperty().bindBidirectional(model.colorPickerTestProperty());
+        colorPicked.valueProperty().bindBidirectional(model.colorPickerProperty());
 
-       //choiceBox.valueProperty().bindBidirectional(choiceBox.valueProperty());    //bind it with Model this Martins tips
+       choiceBox.valueProperty().bindBidirectional(model.shapeTypeObjectPropertyProperty());    //bind it with Model this Martins tips
 
     }
 
@@ -68,12 +71,10 @@ public class GameViewController {
 //
        model.setMouseX(mouseEvent.getX());
        model.setMouseY(mouseEvent.getY());
+
        model.choiceButton(cirkelButton,rectangleButton,graphicsContext);
+       //model.creatObjekt(graphicsContext);
 
-
-        //model.creatObjekt(graphicsContext);
-        //shapeClass = Shape.createShape( choiceBox.getValue(), mouseEvent.getX(), mouseEvent.getY(),graphicsContext);// den ska byggas i model.
-        //System.out.println(shapeClass);
     }
 
     public void sizeTextField(ActionEvent actionEvent) {
@@ -84,25 +85,24 @@ public class GameViewController {
     }
 
     public void saveButton(ActionEvent actionEvent) {
-        //model.creatingShape(colorPicked);
-        model.onSaveAction();
 
+    model.onSaveAction();
     }
 
     public void undoButton(ActionEvent actionEvent) {
-        GraphicsContext context = canvas.getGraphicsContext2D();
-        model.shapeList2.remove(model.shapeList2.size() - 1);
-        context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        draw(graphicsContext);
+//        GraphicsContext context = canvas.getGraphicsContext2D();
+//        model.shapeList2.remove(model.shapeList2.size() - 1);
+//        context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+//        draw(graphicsContext);
     }
 
-    public void draw(GraphicsContext graphicsContext) {
-        System.out.println("test!");
-        for (var shape : model.shapeList2) {
-
-        }
-        System.out.println("test2");
-    }
+   // public void draw(GraphicsContext graphicsContext) {
+//        System.out.println("test!");
+//        for (var shape : model.shapeList2) {
+//
+//        }
+//        System.out.println("test2");
+  //  }
 }
 
 

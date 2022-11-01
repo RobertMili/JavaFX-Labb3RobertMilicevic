@@ -12,7 +12,7 @@ public class Rectangle extends Shape  {
     }
 
     @Override
-    Shape draw(GraphicsContext graphicsContext) {
+    public Shape draw(GraphicsContext graphicsContext) {
         try {
             graphicsContext.setFill(getColor());
             graphicsContext.fillRect(getMouseX(), getMouseY(), getSize(), getSize());
@@ -21,4 +21,5 @@ public class Rectangle extends Shape  {
         }
         return null;
     }
+
 }

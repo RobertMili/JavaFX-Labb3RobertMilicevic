@@ -12,7 +12,7 @@ public class Cirkel extends Shape {
     }
 
     @Override
-    Shape draw(GraphicsContext graphicsContext) {
+    public Shape draw(GraphicsContext graphicsContext) {
         try {
             graphicsContext.setFill(getColor());
             graphicsContext.fillOval(getMouseX(),getMouseY(),getSize(),getSize());
@@ -23,5 +23,8 @@ public class Cirkel extends Shape {
         return null;
     }
 
-}
+
+    }
+
+
 

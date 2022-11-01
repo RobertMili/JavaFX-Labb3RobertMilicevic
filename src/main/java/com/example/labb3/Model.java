@@ -4,10 +4,8 @@ import com.example.labb3.Shapes.*;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ColorPicker;
+
 import javafx.scene.control.ToggleButton;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -17,67 +15,56 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
+
 
 public class Model {
 
     private double mouseX;
     private double mouseY;
-    private final int size = 50;
 
-    List<Shape> shapeList = new ArrayList<>();
-    ObservableList<Shape> shapeList2 =  FXCollections.observableArrayList();
+    ObservableList<Shape> shapeList = FXCollections.observableArrayList();
+    ObservableList<ShapeType> shapeTypesList = FXCollections.observableArrayList(ShapeType.values());
 
-
-    ObservableList<ShapeType>shapeTypesList = FXCollections.observableArrayList(ShapeType.values());
-
-    public Rectangle rectangle;
-    public Cirkel cirkel; //This connect
     private final StringProperty shapeSize;
 
-    private  ObjectProperty<Color> colorPickerTest;
-
-
+    private final ObjectProperty<Color> colorPicker;
+    private final ObjectProperty<ShapeType> shapeTypeObjectProperty;
     Shape shapeClass;
-    Position position = new Position(getMouseX(), getMouseY());
+
     public Stage stage;
-    private Deque<Shape> undo;
-
-    GameViewController controller;
-    public Property<ShapeType> choiceBox;
-
-
-
-
-
-//    public ObservableList<Shape> getShapeList2() {
-//        return shapeList2;
-//    }
-//
-//    public void setShapeList2(ObservableList<Shape> shapeList2) {
-//        this.shapeList2 = shapeList2;
-//    }
 
     public Model() {
         this.shapeSize = new SimpleStringProperty("50");
-        this.undo = new ArrayDeque<>();
-        this.colorPickerTest = new SimpleObjectProperty<>(Color.WHITE);
 
+        this.colorPicker = new SimpleObjectProperty<>(Color.WHITE);
+        this.shapeTypeObjectProperty = new SimpleObjectProperty<>(ShapeType.CIRCLE);
     }
 
-    public Color getColorPickerTest() {
-        return colorPickerTest.get();
+    public ObservableList<Shape> getShapeList() {
+        return shapeList;
     }
 
-    public ObjectProperty<Color> colorPickerTestProperty() {
-        return colorPickerTest;
+    public void setShapeList(ObservableList<Shape> shapeList) {
+        this.shapeList = shapeList;
     }
 
-    public void setColorPickerTest(Color colorPickerTest) {
-        this.colorPickerTest.set(colorPickerTest);
+    public ObjectProperty<ShapeType> shapeTypeObjectPropertyProperty() {
+        return shapeTypeObjectProperty;
+    }
+
+    //Open  if you want to use choiceBox button
+    public void setShapeTypeObjectProperty(ShapeType shapeTypeObjectProperty) {
+        this.shapeTypeObjectProperty.set(shapeTypeObjectProperty);
+    }
+
+    public Color getColorPicker() {
+        return colorPicker.get();
+    }
+
+    public ObjectProperty<Color> colorPickerProperty() {
+        return colorPicker;
     }
 
     public double getMouseX() {
@@ -96,23 +83,6 @@ public class Model {
         this.mouseY = mouseY;
     }
 
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
-
-    public void setRectangle(Rectangle rectangle) {
-        this.rectangle = rectangle;
-    }
-
-    public Cirkel getCirkel() {
-        return cirkel;
-    }
-
-    public void setCirkel(Cirkel cirkel) {
-        this.cirkel = cirkel;
-    }
-
-
     public String getShapeSize() {
         return shapeSize.get();
     }
@@ -130,133 +100,103 @@ public class Model {
         return shapeSize;
     }
 
-    public void setShapeList(String shapeSize) {
-        this.shapeSize.set(shapeSize);
-    }
-
-//    public double changeSizeOnSelectedShapes() {
-//        shapeClass.setSize(getShapeSizeAsDouble());
-//        return 0;
-//    }
-
-    public void setMouse() {
-        this.position = new Position(getMouseX(), getMouseY());
-        System.out.println(position);
-
-        System.out.println("this is x  " + position.x());
-        System.out.println("this is y " + position.y());
-
-    }
-
-
-    public Property<ShapeType> choiceButton(ToggleButton cirkelButton, ToggleButton rectangleButton, GraphicsContext graphicsContext ) {
+    public void choiceButton(ToggleButton cirkelButton, ToggleButton rectangleButton, GraphicsContext graphicsContext) {
         if (cirkelButton.isSelected() && !rectangleButton.isSelected()) {
 
-            shapeClass = Shape.createShape
-                    (shapeTypesList.get(0),
-                            getMouseX() - (double)size / 2,
-                            getMouseY() - (double) size/ 2,
-                            graphicsContext,getShapeSizeAsDouble(),
-                            getColorPickerTest());
+            creatingCirkel(graphicsContext);
 
-            //creatingShape(colorPicker);
+            creatingShapeToLista();
+
 
         } else if (rectangleButton.isSelected() && !cirkelButton.isSelected()) {
 
-            shapeClass = Shape.createShape(
-                    shapeTypesList.get(1),
-                    getMouseX() - (double) size /2,
-                    getMouseY() - (double) size/2,
-                    graphicsContext,getShapeSizeAsDouble(),
-                    getColorPickerTest());
+            creatingRectangle(graphicsContext);
+
+            creatingShapeToLista();
 
         }
-        return null;
     }
 
-    public void creatingShape(ColorPicker colorPicker) {
-//        var shapeToList = new Shape(getMouseX(),getMouseY(),colorPicker, getShapeSizeAsDouble());
-//
-//        shapeList2.add(shapeToList);
-//
-//        System.out.println(shapeList2.toString());
-
+    private void creatingCirkel(GraphicsContext graphicsContext) {
+        shapeClass = Shape.createShape
+                (shapeTypesList.get(0),
+                        getMouseX() - (getShapeSizeAsDouble() / 2),
+                        getMouseY() - (getShapeSizeAsDouble() / 2),
+                        graphicsContext, getShapeSizeAsDouble(),
+                        getColorPicker());
     }
+
+    private void creatingRectangle(GraphicsContext graphicsContext) {
+        shapeClass = Shape.createShape(
+                shapeTypesList.get(1),
+                getMouseX() - (getShapeSizeAsDouble() / 2),
+                getMouseY() - (getShapeSizeAsDouble() / 2),
+                graphicsContext, getShapeSizeAsDouble(),
+                getColorPicker());
+    }
+
+
+    public void creatingShapeToLista() {
+        var shapeToList = new Shape(getMouseX(), getMouseY(), getShapeSizeAsDouble(), getColorPicker()) {
+            @Override
+            protected Shape draw(GraphicsContext graphicsContext) {
+                return null;
+            }
+        };
+
+        shapeList.add(shapeToList);
+
+        System.out.println(shapeToList.toString()); // delete this
+    }
+
     public void onSaveAction() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save as");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().clear();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV","*.csv"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
 
         File filePath = fileChooser.showSaveDialog(stage);
 
-        if( filePath != null)
-        saveToFile(filePath.toPath());
+        if (filePath != null)
+            saveToFile(filePath.toPath());
     }
+
     public void saveToFile(Path file) {
         StringBuilder outPut = new StringBuilder();
-        List<String> list = new ArrayList();
-        list.add("<svg width=\"1540.0\" height=\"740.0\" xmlns=\"http://www.w3.org/2000/svg/\" version=\"1.1\">");
 
-        for (Shape p : shapeList2) {
+        for (Shape p : shapeList) {
             outPut.append(p.getMouseX());
             outPut.append(",");
             outPut.append(p.getMouseY());
             outPut.append(",");
-            //outPut.append(p.getColor());
+            outPut.append(p.getSize());
             outPut.append(",");
-            //outPut.append(p.getSize());
+            outPut.append(p.getColor());
             outPut.append("\n");
         }
-
-        list.add(String.valueOf(outPut));
-        list.add("</svg>");
         try {
             Files.writeString(file, outPut.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void onAddAction(ActionEvent actionEvent,ColorPicker colorPicker) {
-        creatingShape(colorPicker);
-    }
-
-
-    public void undo(GraphicsContext graphicsContext, ColorPicker colorPicker) {
-
 
     }
-    public Shape drawCirkel(GraphicsContext graphicsContext, ColorPicker colorPicker) {
+}
 
-        try {
-            graphicsContext.setFill(colorPicker.getValue());
-            graphicsContext.fillOval(getMouseX() - (double)size / 2, getMouseY() - (double)size / 2, getShapeSizeAsDouble(), getShapeSizeAsDouble());
 
-        } catch (Exception e) {
-            System.out.println("Error with draw");
-        }
-        return null;
-    }
-
-    public Shape drawRectangle(GraphicsContext graphicsContext, ColorPicker colorPicker) {
-
-        try {
-            graphicsContext.setFill(colorPicker.getValue());
-            graphicsContext.fillRect(getMouseX() - (double)size / 2, getMouseY() - (double)size / 2, getShapeSizeAsDouble(), getShapeSizeAsDouble());
-        } catch (Exception e) {
-            System.out.println("Error with draw");
-        }
-        return null;
-    }
+// This is for choiceBox, I get it after.
+//    public void creatObjekt(GraphicsContext graphicsContext) {
+//        shapeClass = Shape.createShape
+//                (getShapeTypeObjectProperty(),
+//                        getMouseX() - (double)size / 2,
+//                        getMouseY() - (double) size/ 2,
+//                        graphicsContext,getShapeSizeAsDouble(),
+//                        getColorPicker());
+//
+//    }
 //
 
-
-    }
 
 
 
