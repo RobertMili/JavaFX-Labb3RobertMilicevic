@@ -4,6 +4,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
+import java.util.Objects;
+
 public abstract class Shape  {
 
     private double mouseX;
@@ -48,17 +50,40 @@ public abstract class Shape  {
         this.color = color;
     }
 
-    public static Shape createShape(ShapeType type, double mouseX, double mouseY, GraphicsContext graphicsContext, double size,Color color){
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shape shape = (Shape) o;
+        return Double.compare(shape.mouseX, mouseX) == 0 && Double.compare(shape.mouseY, mouseY) == 0 && Double.compare(shape.size, size) == 0 && Objects.equals(color, shape.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mouseX, mouseY, size, color);
+    }
+
+    @Override
+    public String toString() {
+        return "Shape{" +
+                "mouseX=" + mouseX +
+                ", mouseY=" + mouseY +
+                ", size=" + size +
+                ", color=" + color +
+                '}';
+    }
+
+    public static Shape createShape(ShapeType type, double mouseX, double mouseY, GraphicsContext graphicsContext, double size, Color color){
 
         if (type == ShapeType.CIRCLE) {
 
-            return new Cirkel(mouseX, mouseY,size,color).draw(graphicsContext);
+            return new Cirkel(mouseX, mouseY,size,color);
         } else
-            return new Rectangle(mouseX, mouseY, size,color).draw(graphicsContext);
+            return new Rectangle(mouseX, mouseY, size,color);
 
     }
 
+    public abstract void draw(GraphicsContext graphicsContext);
 
-    protected abstract Shape draw(GraphicsContext graphicsContext);
 
 }

@@ -12,14 +12,14 @@ public class Rectangle extends Shape  {
     }
 
     @Override
-    public Shape draw(GraphicsContext graphicsContext) {
-        try {
+    public void draw(GraphicsContext graphicsContext) {
+
             graphicsContext.setFill(getColor());
             graphicsContext.fillRect(getMouseX(), getMouseY(), getSize(), getSize());
-        } catch (Exception e) {
-            System.out.println("Error with draw");
-        }
-        return null;
+
+
     }
+
+
 
 }

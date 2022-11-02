@@ -4,6 +4,7 @@ import com.example.labb3.Shapes.*;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 import javafx.scene.control.ToggleButton;
@@ -15,11 +16,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
+import java.util.*;
 
 
 public class Model {
-
     private double mouseX;
     private double mouseY;
 
@@ -30,15 +30,23 @@ public class Model {
 
     private final ObjectProperty<Color> colorPicker;
     private final ObjectProperty<ShapeType> shapeTypeObjectProperty;
-    Shape shapeClass;
 
     public Stage stage;
+
+
+
+
+    Deque<Command> undoStack= new ArrayDeque<>();
+
 
     public Model() {
         this.shapeSize = new SimpleStringProperty("50");
 
         this.colorPicker = new SimpleObjectProperty<>(Color.WHITE);
         this.shapeTypeObjectProperty = new SimpleObjectProperty<>(ShapeType.CIRCLE);
+
+
+
     }
 
     public ObjectProperty<ShapeType> shapeTypeObjectPropertyProperty() {
@@ -48,6 +56,9 @@ public class Model {
     //Open  if you want to use choiceBox button
     public void setShapeTypeObjectProperty(ShapeType shapeTypeObjectProperty) {
         this.shapeTypeObjectProperty.set(shapeTypeObjectProperty);
+    }
+    public ShapeType getShapeTypeObjectProperty() {
+        return shapeTypeObjectProperty.get();
     }
 
     public Color getColorPicker() {
@@ -91,54 +102,6 @@ public class Model {
         return shapeSize;
     }
 
-    public void choiceButton(ToggleButton cirkelButton, ToggleButton rectangleButton, GraphicsContext graphicsContext) {
-        if (cirkelButton.isSelected() && !rectangleButton.isSelected()) {
-
-            creatingCirkel(graphicsContext);
-
-            creatingShapeToLista();
-
-
-        } else if (rectangleButton.isSelected() && !cirkelButton.isSelected()) {
-
-            creatingRectangle(graphicsContext);
-
-            creatingShapeToLista();
-
-        }
-    }
-
-    private void creatingCirkel(GraphicsContext graphicsContext) {
-        shapeClass = Shape.createShape
-                (shapeTypesList.get(0),
-                        getMouseX() - (getShapeSizeAsDouble() / 2),
-                        getMouseY() - (getShapeSizeAsDouble() / 2),
-                        graphicsContext, getShapeSizeAsDouble(),
-                        getColorPicker());
-    }
-
-    private void creatingRectangle(GraphicsContext graphicsContext) {
-        shapeClass = Shape.createShape(
-                shapeTypesList.get(1),
-                getMouseX() - (getShapeSizeAsDouble() / 2),
-                getMouseY() - (getShapeSizeAsDouble() / 2),
-                graphicsContext, getShapeSizeAsDouble(),
-                getColorPicker());
-    }
-
-
-    public void creatingShapeToLista() {
-        var shapeToList = new Shape(getMouseX(), getMouseY(), getShapeSizeAsDouble(), getColorPicker()) {
-            @Override
-            protected Shape draw(GraphicsContext graphicsContext) {
-                return null;
-            }
-        };
-
-        shapeList.add(shapeToList);
-
-        System.out.println(shapeToList.toString()); // delete this
-    }
 
     public void onSaveAction() {
         FileChooser fileChooser = new FileChooser();
@@ -173,20 +136,40 @@ public class Model {
         }
 
     }
+
+    // This is for choiceBox, I get it after.
+    public void createObjekt(GraphicsContext graphicsContext) {
+       var test =  Shape.createShape
+                (getShapeTypeObjectProperty(),
+                        getMouseX() - (getShapeSizeAsDouble() / 2),
+                        getMouseY() - (getShapeSizeAsDouble() / 2),
+                        graphicsContext,getShapeSizeAsDouble(),
+                        getColorPicker());
+
+       shapeList.add(test);
+        Command undo = () -> shapeList.remove(test);
+        undoStack.push(undo);
+
+    }
+
+
+    public void undoCommand() {
+        Command undoToExecute = undoStack.pop();
+        undoToExecute.execute();
+
+        System.out.println("This is undo list without last index: ");
+        System.out.println(shapeList.toString());
+    }
+
 }
 
 
-// This is for choiceBox, I get it after.
-//    public void creatObjekt(GraphicsContext graphicsContext) {
-//        shapeClass = Shape.createShape
-//                (getShapeTypeObjectProperty(),
-//                        getMouseX() - (double)size / 2,
-//                        getMouseY() - (double) size/ 2,
-//                        graphicsContext,getShapeSizeAsDouble(),
-//                        getColorPicker());
-//
-//    }
-//
+@FunctionalInterface
+interface Command {
+    void execute();
+}
+
+
 
 
 

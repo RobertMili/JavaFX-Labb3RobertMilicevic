@@ -12,19 +12,19 @@ public class Cirkel extends Shape {
     }
 
     @Override
-    public Shape draw(GraphicsContext graphicsContext) {
-        try {
+    public void draw(GraphicsContext graphicsContext) {
+
             graphicsContext.setFill(getColor());
             graphicsContext.fillOval(getMouseX(),getMouseY(),getSize(),getSize());
 
-        } catch (Exception e) {
-            System.out.println("Error with draw");
-        }
-        return null;
-    }
 
 
     }
+
+
+
+
+}
 
 
 
