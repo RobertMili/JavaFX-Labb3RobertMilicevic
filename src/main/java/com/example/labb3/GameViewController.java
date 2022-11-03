@@ -44,6 +44,7 @@ public class GameViewController {
         sendingMouseCourseToModel(mouseEvent);
 
         if (toggleButton.isSelected()) {
+
             if (choiceBox.getValue().equals(ShapeType.CIRCLE)) {
                 updateCirkel();
             }
@@ -70,7 +71,7 @@ public class GameViewController {
     }
 
     private void drawOnCanvas() {
-        for (Shape shape : model.shapeList) {
+        for (Shape shape : model.shapeToList) {
             shape.draw(graphicsContext);
         }
     }
@@ -80,8 +81,7 @@ public class GameViewController {
             return;
         clearCanvas();
         model.checkIsInsideShape().ifPresent(shape -> shape.setColor(model.getColorPicker()));
-        clearCanvas();
-        model.checkIsInsideShape().ifPresent(shape -> shape.setSize(model.getShapeSizeAsDouble() ));
+        model.checkIsInsideShape().ifPresent(shape -> shape.setSize(model.getShapeSizeAsDouble()));
 
     }
     public void updateCirkel() {
@@ -90,6 +90,8 @@ public class GameViewController {
         clearCanvas();
         model.checkIsInsideShape().ifPresent(shape -> shape.setColor(model.getColorPicker()));
         model.checkIsInsideShape().ifPresent(shape -> shape.setSize(model.getShapeSizeAsDouble()));
+
+
     }
     private void sendingMouseCourseToModel(MouseEvent mouseEvent) {
         model.setMouseX(mouseEvent.getX());

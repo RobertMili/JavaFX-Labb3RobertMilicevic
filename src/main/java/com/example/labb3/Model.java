@@ -7,8 +7,6 @@ import javafx.collections.ObservableList;
 
 import javafx.scene.canvas.GraphicsContext;
 
-import javafx.scene.control.ToggleButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -24,7 +22,7 @@ public class Model {
     private double mouseX;
     private double mouseY;
 
-    ObservableList<Shape> shapeList = FXCollections.observableArrayList();
+    ObservableList<Shape> shapeToList = FXCollections.observableArrayList();
     ObservableList<ShapeType> shapeTypesList = FXCollections.observableArrayList(ShapeType.values());
 
     private final StringProperty shapeSize;
@@ -40,7 +38,7 @@ public class Model {
 
 
     public Model() {
-        this.shapeSize = new SimpleStringProperty("100");
+        this.shapeSize = new SimpleStringProperty("50");
 
         this.colorPicker = new SimpleObjectProperty<>(Color.WHITE);
         this.shapeTypeObjectProperty = new SimpleObjectProperty<>(ShapeType.CIRCLE);
@@ -115,7 +113,7 @@ public class Model {
     public void saveToFile(Path file) {
         StringBuilder outPut = new StringBuilder();
 
-        for (Shape p : shapeList) {
+        for (Shape p : shapeToList) {
             outPut.append(p.getMouseX());
             outPut.append(",");
             outPut.append(p.getMouseY());
@@ -137,29 +135,27 @@ public class Model {
     public void createObjekt(GraphicsContext graphicsContext) {
        var test =  Shape.createShape
                 (getShapeTypeObjectProperty(),
-                        getMouseX() - (getShapeSizeAsDouble() / 2),
-                        getMouseY() - (getShapeSizeAsDouble() / 2),
+                            getMouseX(),
+                            getMouseY(),
                         graphicsContext,getShapeSizeAsDouble(),
                         getColorPicker());
 
-       shapeList.add(test);
-        Command undo = () -> shapeList.remove(test);
+       shapeToList.add(test);
+        Command undo = () -> shapeToList.remove(test);
         undoStack.push(undo);
-
     }
-
 
     public void undoCommand() {
         Command undoToExecute = undoStack.pop();
         undoToExecute.execute();
 
         System.out.println("This is undo list without last index: ");
-        System.out.println(shapeList.toString());
+        System.out.println(shapeToList.toString());
     }
 
 
     public Optional<Shape> checkIsInsideShape() {
-        return shapeList.stream()
+        return shapeToList.stream()
                 .filter(shape -> shape.isInsideShape(getMouseX(), getMouseY()))
                 .reduce((first, second) -> second);
 

@@ -15,7 +15,7 @@ public class Rectangle extends Shape  {
     public void draw(GraphicsContext graphicsContext) {
 
             graphicsContext.setFill(getColor());
-            graphicsContext.fillRect(getMouseX(), getMouseY(), getSize(), getSize());
+            graphicsContext.fillRect(getMouseX()  - getSize() - 2.5, getMouseY() - getSize() - 2.5, 2 * getSize() + 5, 2 *  getSize() + 5 );
 
 
     }
