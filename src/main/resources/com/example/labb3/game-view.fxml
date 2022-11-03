@@ -9,8 +9,8 @@
       <children>
          <ChoiceBox fx:id="choiceBox" prefWidth="150.0" />
          <ColorPicker fx:id="colorPicked" />
-         <TextField fx:id="sizeTextField" prefHeight="25.0" prefWidth="76.0" />
-         <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#toggleButton" text="ToggleButton" />
+         <TextField fx:id="sizeTextField"  prefHeight="25.0" prefWidth="76.0" />
+         <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#toggleButton" text="Selected Button" />
 
          <Button mnemonicParsing="false" onAction="#undoButton" text="Undo" />
          <Button mnemonicParsing="false" onAction="#saveButton" text="Save" />

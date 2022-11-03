@@ -20,6 +20,14 @@ public class Rectangle extends Shape  {
 
     }
 
+    @Override
+    public boolean isInsideShape(double mouseX, double mouseY) {
+        double distX = Math.abs(mouseX - getMouseX());
+        double distY = Math.abs(mouseY - getMouseY());
+
+        return distX <= getSize() && distY <= getSize();
+
+    }
 
 
 }

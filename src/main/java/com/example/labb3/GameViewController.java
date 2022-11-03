@@ -2,7 +2,6 @@ package com.example.labb3;
 
 import com.example.labb3.Shapes.*;
 
-import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
@@ -37,24 +36,66 @@ public class GameViewController {
 
         choiceBox.valueProperty().bindBidirectional(model.shapeTypeObjectPropertyProperty());
 
+
     }
 
 
     public void canvasClicked(MouseEvent mouseEvent) {
-        model.setMouseX(mouseEvent.getX());
-        model.setMouseY(mouseEvent.getY());
+        sendingMouseCourseToModel(mouseEvent);
 
-        graphicsContext.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
+        if (toggleButton.isSelected()) {
+            if (choiceBox.getValue().equals(ShapeType.CIRCLE)) {
+                updateCirkel();
+            }
+                updateRectangle();
 
+
+            drawOnCanvas();
+
+        } else {
+            creatingObjektOnCanvas();
+
+        }
+    }
+
+    private void creatingObjektOnCanvas() {
+        clearCanvas();
 
         model.createObjekt(graphicsContext);
 
+        drawOnCanvas();
+    }
+
+    private void clearCanvas() {
+        graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    }
+
+    private void drawOnCanvas() {
         for (Shape shape : model.shapeList) {
             shape.draw(graphicsContext);
         }
-
     }
 
+    public void updateRectangle() {
+        if (model.checkIsInsideShape().isEmpty())
+            return;
+        clearCanvas();
+        model.checkIsInsideShape().ifPresent(shape -> shape.setColor(model.getColorPicker()));
+        clearCanvas();
+        model.checkIsInsideShape().ifPresent(shape -> shape.setSize(model.getShapeSizeAsDouble() ));
+
+    }
+    public void updateCirkel() {
+        if (model.checkIsInsideShape().isEmpty())
+            return;
+        clearCanvas();
+        model.checkIsInsideShape().ifPresent(shape -> shape.setColor(model.getColorPicker()));
+        model.checkIsInsideShape().ifPresent(shape -> shape.setSize(model.getShapeSizeAsDouble()));
+    }
+    private void sendingMouseCourseToModel(MouseEvent mouseEvent) {
+        model.setMouseX(mouseEvent.getX());
+        model.setMouseY(mouseEvent.getY());
+    }
 
 
     public void saveButton() {
@@ -63,15 +104,15 @@ public class GameViewController {
 
     public void undoButton() {
         model.undoCommand();
-        graphicsContext.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
+        clearCanvas();
 
-        for (Shape shape : model.shapeList) {
-            shape.draw(graphicsContext);
-        }
+        drawOnCanvas();
     }
 
 
     public void toggleButton() {
+
+
     }
 }
 

@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 
 import javafx.scene.canvas.GraphicsContext;
 
+import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -35,8 +37,10 @@ public class Model {
     Deque<Command> undoStack= new ArrayDeque<>();
 
 
+
+
     public Model() {
-        this.shapeSize = new SimpleStringProperty("50");
+        this.shapeSize = new SimpleStringProperty("100");
 
         this.colorPicker = new SimpleObjectProperty<>(Color.WHITE);
         this.shapeTypeObjectProperty = new SimpleObjectProperty<>(ShapeType.CIRCLE);
@@ -152,6 +156,16 @@ public class Model {
         System.out.println("This is undo list without last index: ");
         System.out.println(shapeList.toString());
     }
+
+
+    public Optional<Shape> checkIsInsideShape() {
+        return shapeList.stream()
+                .filter(shape -> shape.isInsideShape(getMouseX(), getMouseY()))
+                .reduce((first, second) -> second);
+
+
+    }
+
 
 }
 

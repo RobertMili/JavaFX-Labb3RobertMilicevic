@@ -21,7 +21,14 @@ public class Cirkel extends Shape {
 
     }
 
+    @Override
+    public boolean isInsideShape(double mouseX, double mouseY) {
+        double distX = mouseX - getMouseX();
+        double distY = mouseY -getMouseY();
+        double distance = Math.sqrt((distX * distX) + (distY * distY));
 
+        return distance <= getSize();
+    }
 
 
 }

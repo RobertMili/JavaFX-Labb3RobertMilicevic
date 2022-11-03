@@ -11,9 +11,10 @@ public abstract class Shape  {
     private double mouseX;
     private double mouseY;
 
-    private final double size;
+    private double size;
 
     private Color color;
+
 
     public Shape(double mouseX, double mouseY, double size, Color color) {
         this.mouseX = mouseX;
@@ -40,6 +41,10 @@ public abstract class Shape  {
 
     public double getSize() {
         return size;
+    }
+
+    public void setSize(double size) {
+        this.size = size;
     }
 
     public Color getColor() {
@@ -85,5 +90,6 @@ public abstract class Shape  {
 
     public abstract void draw(GraphicsContext graphicsContext);
 
+    public abstract boolean isInsideShape(double mouseX, double mouseY);
 
 }
