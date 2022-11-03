@@ -4,10 +4,9 @@ import com.example.labb3.Shapes.*;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.canvas.Canvas;
+
 import javafx.scene.canvas.GraphicsContext;
 
-import javafx.scene.control.ToggleButton;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -33,9 +32,6 @@ public class Model {
 
     public Stage stage;
 
-
-
-
     Deque<Command> undoStack= new ArrayDeque<>();
 
 
@@ -53,10 +49,6 @@ public class Model {
         return shapeTypeObjectProperty;
     }
 
-    //Open  if you want to use choiceBox button
-    public void setShapeTypeObjectProperty(ShapeType shapeTypeObjectProperty) {
-        this.shapeTypeObjectProperty.set(shapeTypeObjectProperty);
-    }
     public ShapeType getShapeTypeObjectProperty() {
         return shapeTypeObjectProperty.get();
     }
@@ -137,7 +129,7 @@ public class Model {
 
     }
 
-    // This is for choiceBox, I get it after.
+
     public void createObjekt(GraphicsContext graphicsContext) {
        var test =  Shape.createShape
                 (getShapeTypeObjectProperty(),

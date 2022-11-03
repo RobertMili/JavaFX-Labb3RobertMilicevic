@@ -18,21 +18,13 @@ public class GameViewController {
 
     public TextField sizeTextField;
 
-    public ToggleButton rectangleButton;
-    public ToggleButton cirkelButton;
+
     public ChoiceBox<ShapeType> choiceBox;
+    public ToggleButton toggleButton;
 
 
-    //Todo Redan utritade objekt ska kunna väljas genom att gå över i select mode och klicka på skärmen.
-    /*
-    Redan utritade objekt ska kunna väljas genom att gå över i select mode och klicka på skärmen.
-    Använd musens koordinater för att leta upp det objekt du klickat på.
-    Tips! Implementera en metod på dina shapes för att fråga om koordinaterna är inom shapens area.
-     */
-    // Mouse position to record class
-    //todo Undo button kolla på slide
     //Todo Save objects - export av ritade objekt ska kunna ske som svg-format
-    //Todo test
+   // Make 2x test
 
     public void initialize() {
         graphicsContext = canvas.getGraphicsContext2D();
@@ -43,19 +35,16 @@ public class GameViewController {
 
         colorPicked.valueProperty().bindBidirectional(model.colorPickerProperty());
 
-        choiceBox.valueProperty().bindBidirectional(model.shapeTypeObjectPropertyProperty());    //bind it with Model this Martins tips
+        choiceBox.valueProperty().bindBidirectional(model.shapeTypeObjectPropertyProperty());
 
     }
 
 
     public void canvasClicked(MouseEvent mouseEvent) {
-//
         model.setMouseX(mouseEvent.getX());
         model.setMouseY(mouseEvent.getY());
 
-        //model.choiceButton(cirkelButton, rectangleButton, graphicsContext);
-
-        graphicsContext.clearRect(0,0, canvas.getWidth(), canvas.getHeight()); //Martin fixade
+        graphicsContext.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
 
 
         model.createObjekt(graphicsContext);
@@ -66,19 +55,13 @@ public class GameViewController {
 
     }
 
-    public void sizeTextField(ActionEvent actionEvent) {
-    }
 
-    public void cirkelButton(ActionEvent actionEvent) {
 
-    }
-
-    public void saveButton(ActionEvent actionEvent) {
-
+    public void saveButton() {
         model.onSaveAction();
     }
 
-    public void undoButton(ActionEvent actionEvent) {
+    public void undoButton() {
         model.undoCommand();
         graphicsContext.clearRect(0,0, canvas.getWidth(), canvas.getHeight());
 
@@ -88,24 +71,8 @@ public class GameViewController {
     }
 
 
-
-
+    public void toggleButton() {
+    }
 }
-
-
-/*
-    Trying to do deleteButton
-     public void deleteButton(ActionEvent actionEvent) {
-        var contex = canvas.getGraphicsContext2D();
-
-        contex.clearRect(0, 0,canvas.getWidth(), canvas.getHeight());
-
-
-    }
-    public void delete() {
-        graphicsContext.setFill(Color.TRANSPARENT);
-        //in
-    }
- */
 
 
