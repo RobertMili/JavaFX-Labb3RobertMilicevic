@@ -61,7 +61,7 @@ public class GameViewController {
     private void creatingObjektOnCanvas() {
         clearCanvas();
 
-        model.createObjekt(graphicsContext);
+        model.createObjekt();
 
         drawOnCanvas();
     }

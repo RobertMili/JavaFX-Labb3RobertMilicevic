@@ -1,15 +1,14 @@
 package com.example.labb3.Shapes;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
 public abstract class Shape  {
 
-    private double mouseX;
-    private double mouseY;
+    private final double mouseX;
+    private final double mouseY;
 
     private double size;
 
@@ -27,17 +26,12 @@ public abstract class Shape  {
         return mouseX;
     }
 
-    public void setMouseX(double mouseX) {
-        this.mouseX = mouseX;
-    }
+
 
     public double getMouseY() {
         return mouseY;
     }
 
-    public void setMouseY(double mouseY) {
-        this.mouseY = mouseY;
-    }
 
     public double getSize() {
         return size;
@@ -78,7 +72,7 @@ public abstract class Shape  {
                 '}';
     }
 
-    public static Shape createShape(ShapeType type, double mouseX, double mouseY, GraphicsContext graphicsContext, double size, Color color){
+    public static Shape createShape(ShapeType type, double mouseX, double mouseY, double size, Color color){
 
         if (type == ShapeType.CIRCLE) {
 

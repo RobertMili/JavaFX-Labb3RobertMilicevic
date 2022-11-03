@@ -1,8 +1,7 @@
 package com.example.labb3.Shapes;
 
-import com.example.labb3.Model;
+
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
 public class Cirkel extends Shape {

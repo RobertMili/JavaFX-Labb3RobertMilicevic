@@ -5,7 +5,6 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javafx.scene.canvas.GraphicsContext;
 
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -132,12 +131,12 @@ public class Model {
     }
 
 
-    public void createObjekt(GraphicsContext graphicsContext) {
+    public void createObjekt() {
        var test =  Shape.createShape
                 (getShapeTypeObjectProperty(),
                             getMouseX(),
                             getMouseY(),
-                        graphicsContext,getShapeSizeAsDouble(),
+                        getShapeSizeAsDouble(),
                         getColorPicker());
 
        shapeToList.add(test);
