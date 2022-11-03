@@ -49,8 +49,7 @@ public class GameViewController {
             }
                 updateRectangle();
 
-
-            drawOnCanvas();
+                drawOnCanvas();
 
         } else {
             creatingObjektOnCanvas();
