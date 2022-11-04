@@ -4,6 +4,7 @@ module com.example.labb3 {
 
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
+    requires javafx.swing;
 
     opens com.example.labb3 to javafx.fxml;
     exports com.example.labb3;
