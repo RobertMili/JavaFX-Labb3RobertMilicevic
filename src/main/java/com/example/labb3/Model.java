@@ -13,11 +13,11 @@ import javafx.scene.paint.Color;
 
 import java.util.*;
 
-
 @FunctionalInterface
 interface Command {
     void execute();
 }
+
 
 public class Model {
     private final StringProperty shapeSize;
@@ -106,17 +106,22 @@ public class Model {
 
         shapeList.add(creatingObjekt);
         addUndo(creatingObjekt);
+        addRedo(creatingObjekt);
     }
 
     private void addUndo(Shape creatingObjekt) {
-//        addRedo(creatingObjekt);
+
         Command undo = () -> shapeList.remove(creatingObjekt);
         undoStack.push(undo);
     }
-//    private void addRedo(Shape creatingObjekt) {
-//        Command redo = () -> shapeList.get(shapeList.size() - 1);
-//        redoStack.push(redo);
-//    }
+    //TOdo fix this
+    private void addRedo(Shape creatingObjekt) {
+        Command redo = () -> shapeList.add(creatingObjekt);
+        redoStack.push(redo);
+        System.out.println("This is redo redo size");
+        System.out.println(creatingObjekt.toString());
+
+    }
 
     public void undoCommand() {
         Command undoToExecute = undoStack.pop();
@@ -129,6 +134,7 @@ public class Model {
         Command undoToExecute = redoStack.pop();
         undoToExecute.execute();
     }
+
 
     public Optional<Shape> checkIsInsideShape() {
         return shapeList.stream()

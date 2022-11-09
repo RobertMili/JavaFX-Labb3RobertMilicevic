@@ -3,7 +3,6 @@ package com.example.labb3;
 import com.example.labb3.Shapes.*;
 
 import com.example.labb3.SvgFile.SvgReading;
-import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
