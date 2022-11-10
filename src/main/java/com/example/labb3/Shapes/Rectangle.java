@@ -39,7 +39,12 @@ public class Rectangle extends Shape  {
                 "fill=\"" + convertColor + "\" />";
     }
 
-
+    @Override
+    public String toSVG() {
+        String svgColorCode = "#" + getColor().toString().substring(2, 10);
+        return "<rect fill=\"" + svgColorCode + "\" stroke=\"" + svgColorCode + "\" x=\"" + getMouseX() +
+                "\" y=\"" + getMouseY() + "\" width=\"" + getSize() + "\" height=\"" + getSize() + "\"/>";
+    }
 }
 
 

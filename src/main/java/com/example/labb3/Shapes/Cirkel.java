@@ -38,6 +38,12 @@ public class Cirkel extends Shape {
                 "fill=\"" + convertColor + "\" />";
 
     }
+    @Override
+    public String toSVG() {
+        String svgColorCode = "#" + getColor().toString().substring(2, 10);
+        return "<circle cx=\"" + getMouseX() + "\" cy=\"" + getMouseY() + "\" r=\"" + getSize() + "\" fill=\"" + svgColorCode + "\"/>";
+
+    }
 
 
 

@@ -2,16 +2,17 @@ package com.example.labb3.Model;
 
 import com.example.labb3.Shapes.Shape;
 import com.example.labb3.Shapes.ShapeType;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.application.Platform;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 
-
-import java.util.*;
+import java.io.*;
+import java.net.Socket;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Optional;
 
 @FunctionalInterface
 interface Command {
@@ -30,6 +31,23 @@ public class Model {
     Deque<Command> redoStack = new ArrayDeque<>();
     private double mouseX;
     private double mouseY;
+
+
+    private PrintWriter writer;
+    private BufferedReader reader;
+
+    public BooleanProperty ServerConnected = new SimpleBooleanProperty();
+    public ObservableList<String> shapeList2 = FXCollections.observableArrayList();
+
+
+
+
+
+
+    public BooleanProperty serverConnectedProperty() {
+        return ServerConnected;
+    }
+
 
 
     public Model() {
@@ -107,6 +125,8 @@ public class Model {
         shapeList.add(creatingObjekt);
         addUndo(creatingObjekt);
         addRedo(creatingObjekt);
+        shapeList2.add(creatingObjekt.toString());
+
     }
 
     private void addUndo(Shape creatingObjekt) {
@@ -142,6 +162,53 @@ public class Model {
                 .reduce((first, second) -> second);
 
     }
+
+
+
+    public void connectToServer() {
+        try {
+            Socket socket = new Socket("localhost", 8000);
+            OutputStream output = socket.getOutputStream();
+
+            writer = new PrintWriter(output, true);
+            InputStream input = socket.getInputStream();
+
+            reader = new BufferedReader(new InputStreamReader(input));
+
+
+            var thread = new Thread(() -> {
+                try {
+                    while (true) {
+                        serverConnectedProperty().setValue(false);
+                        String line = reader.readLine();
+                            Platform.runLater(() -> shapeList2.add(line));
+
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            thread.setDaemon(true);
+            thread.start();
+
+        } catch (IOException e) {
+
+            System.out.println("Error");
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void sendShape(String string) {
+
+        writer.println(string);
+
+    }
+
+    public Shape lastShape() {
+        return shapeList.get(shapeList.size() - 1);
+    }
+
 
 }
 

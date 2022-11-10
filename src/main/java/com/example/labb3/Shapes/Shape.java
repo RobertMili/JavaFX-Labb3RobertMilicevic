@@ -86,4 +86,8 @@ public abstract class Shape {
     public abstract boolean isInsideShape(double mouseX, double mouseY);
 
     public abstract String drawSVG();
+    public abstract String toSVG();
+
+
+
 }

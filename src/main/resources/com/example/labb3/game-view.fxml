@@ -6,20 +6,20 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labb3.GameViewController">
    <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="700.0">
-      <ChoiceBox fx:id="choiceBox" prefWidth="150.0"/>
-      <ColorPicker fx:id="colorPicked"/>
-      <TextField fx:id="sizeTextField" prefHeight="25.0" prefWidth="76.0"/>
-      <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#toggleButton" text="Selected Button"/>
+      <ChoiceBox fx:id="choiceBox" prefWidth="150.0" />
+      <ColorPicker fx:id="colorPicked" />
+      <TextField fx:id="sizeTextField" prefHeight="25.0" prefWidth="76.0" />
+      <ToggleButton fx:id="toggleButton" mnemonicParsing="false" onAction="#toggleButton" text="Selected Button" />
 
-      <Button mnemonicParsing="false" onAction="#undoButton" text="Undo"/>
-      <Button mnemonicParsing="false" text="redoButton" onAction="#redoButton"/>
-      <Button mnemonicParsing="false" onAction="#saveButton" text="Save"/>
+      <Button mnemonicParsing="false" onAction="#undoButton" text="Undo" />
+      <Button mnemonicParsing="false" onAction="#redoButton" text="redoButton" />
+      <Button mnemonicParsing="false" onAction="#saveButton" text="Save" />
+      <Button mnemonicParsing="false" text="send to server" fx:id="sendToServer" onAction="#connectToServer"/>
 
 
    </HBox>
    <Pane layoutX="-1.0" layoutY="46.0" prefHeight="633.0" prefWidth="690.0">
-      <Canvas fx:id="canvas" height="643.0" layoutX="11.0" layoutY="4.0" onMouseClicked="#canvasClicked" width="690.0"
-              BorderPane.alignment="TOP_LEFT"/>
+      <Canvas fx:id="canvas" height="643.0" layoutX="11.0" layoutY="4.0" onMouseClicked="#canvasClicked" width="690.0" BorderPane.alignment="TOP_LEFT" />
    </Pane>
 
 </AnchorPane>

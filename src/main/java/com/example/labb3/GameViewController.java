@@ -1,8 +1,8 @@
 package com.example.labb3;
 
 import com.example.labb3.Model.Model;
-import com.example.labb3.Shapes.*;
-
+import com.example.labb3.Shapes.Shape;
+import com.example.labb3.Shapes.ShapeType;
 import com.example.labb3.SvgFile.SvgReading;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,11 +24,15 @@ public class GameViewController {
     public ChoiceBox<ShapeType> choiceBox;
     public ToggleButton toggleButton;
     public Stage stage;
+    public Button sendToServer;
 
 
-   // Make 2x test
+
+
 
     public void initialize() {
+
+
         graphicsContext = canvas.getGraphicsContext2D();
         sizeTextField.textProperty().bindBidirectional(model.shapeSizeProperty());
 
@@ -133,6 +137,11 @@ public class GameViewController {
     }
 
 
+    public void connectToServer() {
+        model.connectToServer();
+        model.sendShape(model.lastShape().drawSVG());
+
+    }
 }
 
 
