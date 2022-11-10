@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labb3.GameViewController">
-   <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="700.0">
+   <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="812.0">
       <ChoiceBox fx:id="choiceBox" prefWidth="150.0" />
       <ColorPicker fx:id="colorPicked" />
       <TextField fx:id="sizeTextField" prefHeight="25.0" prefWidth="76.0" />
@@ -14,7 +14,7 @@
       <Button mnemonicParsing="false" onAction="#undoButton" text="Undo" />
       <Button mnemonicParsing="false" onAction="#redoButton" text="redoButton" />
       <Button mnemonicParsing="false" onAction="#saveButton" text="Save" />
-      <Button mnemonicParsing="false" text="send to server" fx:id="sendToServer" onAction="#connectToServer"/>
+      <ToggleButton mnemonicParsing="false" onAction="#sendShapeToServer" text="Send to Server" fx:id="sendingToServer" />
 
 
    </HBox>

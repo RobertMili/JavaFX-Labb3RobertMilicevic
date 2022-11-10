@@ -40,14 +40,9 @@ public class Model {
     public ObservableList<String> shapeList2 = FXCollections.observableArrayList();
 
 
-
-
-
-
     public BooleanProperty serverConnectedProperty() {
         return ServerConnected;
     }
-
 
 
     public Model() {
@@ -138,8 +133,6 @@ public class Model {
     private void addRedo(Shape creatingObjekt) {
         Command redo = () -> shapeList.add(creatingObjekt);
         redoStack.push(redo);
-        System.out.println("This is redo redo size");
-        System.out.println(creatingObjekt.toString());
 
     }
 
@@ -150,6 +143,7 @@ public class Model {
         System.out.println("This is undo list without last index: ");
         System.out.println(shapeList.toString());
     }
+
     public void redoCommand() {
         Command undoToExecute = redoStack.pop();
         undoToExecute.execute();
@@ -164,8 +158,8 @@ public class Model {
     }
 
 
-
     public void connectToServer() {
+
         try {
             Socket socket = new Socket("localhost", 8000);
             OutputStream output = socket.getOutputStream();
@@ -181,7 +175,7 @@ public class Model {
                     while (true) {
                         serverConnectedProperty().setValue(false);
                         String line = reader.readLine();
-                            Platform.runLater(() -> shapeList2.add(line));
+                        Platform.runLater(() -> shapeList2.add(line));
 
                     }
                 } catch (IOException e) {

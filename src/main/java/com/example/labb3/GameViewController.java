@@ -6,7 +6,10 @@ import com.example.labb3.Shapes.ShapeType;
 import com.example.labb3.SvgFile.SvgReading;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -24,10 +27,8 @@ public class GameViewController {
     public ChoiceBox<ShapeType> choiceBox;
     public ToggleButton toggleButton;
     public Stage stage;
-    public Button sendToServer;
 
-
-
+    public ToggleButton sendingToServer;
 
 
     public void initialize() {
@@ -45,6 +46,9 @@ public class GameViewController {
         choiceBox.valueProperty().bindBidirectional(model.shapeTypeObjectPropertyProperty());
 
 
+        model.connectToServer();
+
+
     }
 
 
@@ -52,17 +56,26 @@ public class GameViewController {
 
         sendingMouseCourseToModel(mouseEvent);
 
+
         if (toggleButton.isSelected()) {
+
+
 
             if (choiceBox.getValue().equals(ShapeType.CIRCLE)) {
                 updateCirkel();
+
+
             }
                 updateRectangle();
 
                 drawOnCanvas();
 
+            sendShapeToServer();
+
         } else {
             creatingObjektOnCanvas();
+
+            sendShapeToServer();
 
         }
     }
@@ -131,15 +144,16 @@ public class GameViewController {
     }
 
 
-    public void toggleButton() {
+    public void toggleButton() {}
 
 
-    }
 
 
-    public void connectToServer() {
-        model.connectToServer();
-        model.sendShape(model.lastShape().drawSVG());
+    public void sendShapeToServer() {
+
+        if (sendingToServer.isSelected()) {
+            model.sendShape(model.lastShape().drawSVG());
+        }
 
     }
 }
