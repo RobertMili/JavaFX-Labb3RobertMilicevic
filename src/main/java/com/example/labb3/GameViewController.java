@@ -1,5 +1,6 @@
 package com.example.labb3;
 
+import com.example.labb3.Model.Model;
 import com.example.labb3.Shapes.*;
 
 import com.example.labb3.SvgFile.SvgReading;
@@ -44,6 +45,7 @@ public class GameViewController {
 
 
     public void canvasClicked(MouseEvent mouseEvent) {
+
         sendingMouseCourseToModel(mouseEvent);
 
         if (toggleButton.isSelected()) {

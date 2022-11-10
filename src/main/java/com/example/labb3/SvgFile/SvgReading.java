@@ -1,6 +1,6 @@
 package com.example.labb3.SvgFile;
 
-import com.example.labb3.Model;
+import com.example.labb3.Model.Model;
 import com.example.labb3.Shapes.Shape;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;

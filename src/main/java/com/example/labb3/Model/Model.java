@@ -1,4 +1,4 @@
-package com.example.labb3;
+package com.example.labb3.Model;
 
 import com.example.labb3.Shapes.Shape;
 import com.example.labb3.Shapes.ShapeType;
@@ -24,8 +24,8 @@ public class Model {
     private final ObjectProperty<Color> colorPicker;
     private final ObjectProperty<ShapeType> shapeTypeObjectProperty;
 
-    ObservableList<Shape> shapeList;
-    ObservableList<ShapeType> shapeTypesList;
+    public ObservableList<Shape> shapeList;
+    public ObservableList<ShapeType> shapeTypesList;
     Deque<Command> undoStack = new ArrayDeque<>();
     Deque<Command> redoStack = new ArrayDeque<>();
     private double mouseX;
@@ -114,7 +114,7 @@ public class Model {
         Command undo = () -> shapeList.remove(creatingObjekt);
         undoStack.push(undo);
     }
-    //TOdo fix this
+
     private void addRedo(Shape creatingObjekt) {
         Command redo = () -> shapeList.add(creatingObjekt);
         redoStack.push(redo);
@@ -142,7 +142,6 @@ public class Model {
                 .reduce((first, second) -> second);
 
     }
-
 
 }
 
