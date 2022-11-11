@@ -122,7 +122,6 @@ public class Model {
         addRedo(creatingObjekt);
         shapeList2.add(creatingObjekt.toString());
 
-        System.out.println(creatingObjekt.getColor().toString());
 
 
     }
