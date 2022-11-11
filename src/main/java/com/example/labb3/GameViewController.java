@@ -72,13 +72,16 @@ public class GameViewController {
             sendShapeToServer();
 
         } else {
-            model.setColorPicker2(model.getColorPicker());
+            sendingOriginalColorInSecondList();
             creatingObjektOnCanvas();
-
 
             sendShapeToServer();
 
         }
+    }
+
+    private void sendingOriginalColorInSecondList() {
+        model.setColorPicker2(model.getColorPicker());
     }
 
     private void creatingObjektOnCanvas() {
