@@ -153,9 +153,6 @@ public class GameViewController {
 
 
     public void toggleButton() {
-        if (toggleButton.isSelected()) {
-
-        }
     }
 
 
