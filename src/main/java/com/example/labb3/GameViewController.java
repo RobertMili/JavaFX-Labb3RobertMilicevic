@@ -105,6 +105,7 @@ public class GameViewController {
         model.checkIsInsideShape().ifPresent(shape -> shape.setColor(model.getColorPicker()));
         model.checkIsInsideShape().ifPresent(shape -> shape.setSize(model.getShapeSizeAsDouble()));
 
+
     }
     public void updateCirkel() {
         if (model.checkIsInsideShape().isEmpty())

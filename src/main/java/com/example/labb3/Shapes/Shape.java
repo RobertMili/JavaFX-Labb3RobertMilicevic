@@ -73,6 +73,8 @@ public abstract class Shape {
 
     public static Shape createShape(ShapeType type, double mouseX, double mouseY, double size, Color color) {
 
+
+
         if (type == ShapeType.CIRCLE) {
 
             return new Cirkel(mouseX, mouseY, size, color);

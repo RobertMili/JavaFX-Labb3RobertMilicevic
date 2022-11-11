@@ -122,10 +122,12 @@ public class Model {
         addRedo(creatingObjekt);
         shapeList2.add(creatingObjekt.toString());
 
+        System.out.println(creatingObjekt.getColor().toString());
+
+
     }
 
-    private void addUndo(Shape creatingObjekt) {
-
+    public void addUndo(Shape creatingObjekt) {
         Command undo = () -> shapeList.remove(creatingObjekt);
         undoStack.push(undo);
     }
@@ -139,9 +141,7 @@ public class Model {
     public void undoCommand() {
         Command undoToExecute = undoStack.pop();
         undoToExecute.execute();
-
-        System.out.println("This is undo list without last index: ");
-        System.out.println(shapeList.toString());
+        
     }
 
     public void redoCommand() {
@@ -202,6 +202,7 @@ public class Model {
     public Shape lastShape() {
         return shapeList.get(shapeList.size() - 1);
     }
+
 
 
 }
