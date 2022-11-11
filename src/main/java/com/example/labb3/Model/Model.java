@@ -23,27 +23,19 @@ interface Command {
 public class Model {
     private final StringProperty shapeSize;
     private final ObjectProperty<Color> colorPicker;
+    private final ObjectProperty<Color> colorPicker2 = new SimpleObjectProperty<>(Color.BLUE);
     private final ObjectProperty<ShapeType> shapeTypeObjectProperty;
-
     public ObservableList<Shape> shapeList;
     public ObservableList<ShapeType> shapeTypesList;
+    public BooleanProperty ServerConnected = new SimpleBooleanProperty();
+    public ObservableList<String> shapeList2 = FXCollections.observableArrayList();
     Deque<Command> undoStack = new ArrayDeque<>();
     Deque<Command> redoStack = new ArrayDeque<>();
     private double mouseX;
     private double mouseY;
 
-
     private PrintWriter writer;
     private BufferedReader reader;
-
-    public BooleanProperty ServerConnected = new SimpleBooleanProperty();
-    public ObservableList<String> shapeList2 = FXCollections.observableArrayList();
-
-
-    public BooleanProperty serverConnectedProperty() {
-        return ServerConnected;
-    }
-
 
     public Model() {
         this.shapeSize = new SimpleStringProperty("50");
@@ -54,6 +46,18 @@ public class Model {
         this.shapeTypesList = FXCollections.observableArrayList(ShapeType.values());
 
 
+    }
+
+    public Color getColorPicker2() {
+        return colorPicker2.get();
+    }
+
+    public void setColorPicker2(Color colorPicker2) {
+        this.colorPicker2.set(colorPicker2);
+    }
+
+    public BooleanProperty serverConnectedProperty() {
+        return ServerConnected;
     }
 
     public ObservableList<Shape> getShapeList() {
@@ -109,7 +113,7 @@ public class Model {
         return shapeSize;
     }
 
-    public void createObjekt() {
+    public Shape createObjekt() {
         var creatingObjekt = Shape.createShape
                 (getShapeTypeObjectProperty(),
                         getMouseX(),
@@ -119,15 +123,15 @@ public class Model {
 
         shapeList.add(creatingObjekt);
         addUndo(creatingObjekt);
-        addRedo(creatingObjekt);
         shapeList2.add(creatingObjekt.toString());
 
 
-
+        return creatingObjekt;
     }
 
     public void addUndo(Shape creatingObjekt) {
         Command undo = () -> shapeList.remove(creatingObjekt);
+        addRedo(creatingObjekt);
         undoStack.push(undo);
     }
 
@@ -140,7 +144,7 @@ public class Model {
     public void undoCommand() {
         Command undoToExecute = undoStack.pop();
         undoToExecute.execute();
-        
+
     }
 
     public void redoCommand() {
@@ -201,7 +205,6 @@ public class Model {
     public Shape lastShape() {
         return shapeList.get(shapeList.size() - 1);
     }
-
 
 
 }

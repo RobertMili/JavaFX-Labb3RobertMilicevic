@@ -60,20 +60,21 @@ public class GameViewController {
         if (toggleButton.isSelected()) {
 
 
-
             if (choiceBox.getValue().equals(ShapeType.CIRCLE)) {
                 updateCirkel();
 
 
             }
-                updateRectangle();
+            updateRectangle();
 
-                drawOnCanvas();
+            drawOnCanvas();
 
             sendShapeToServer();
 
         } else {
+            model.setColorPicker2(model.getColorPicker());
             creatingObjektOnCanvas();
+
 
             sendShapeToServer();
 
@@ -107,15 +108,18 @@ public class GameViewController {
 
 
     }
+
     public void updateCirkel() {
         if (model.checkIsInsideShape().isEmpty())
             return;
+
         clearCanvas();
         model.checkIsInsideShape().ifPresent(shape -> shape.setColor(model.getColorPicker()));
+        System.out.println(model.getColorPicker().toString());
         model.checkIsInsideShape().ifPresent(shape -> shape.setSize(model.getShapeSizeAsDouble()));
 
-
     }
+
     private void sendingMouseCourseToModel(MouseEvent mouseEvent) {
         model.setMouseX(mouseEvent.getX());
         model.setMouseY(mouseEvent.getY());
@@ -135,8 +139,11 @@ public class GameViewController {
         model.undoCommand();
         clearCanvas();
 
+        model.checkIsInsideShape().ifPresent(shape -> shape.setColor(model.getColorPicker2()));
         drawOnCanvas();
+
     }
+
     public void redoButton() {
         model.redoCommand();
         clearCanvas();
@@ -145,9 +152,11 @@ public class GameViewController {
     }
 
 
-    public void toggleButton() {}
+    public void toggleButton() {
+        if (toggleButton.isSelected()) {
 
-
+        }
+    }
 
 
     public void sendShapeToServer() {
