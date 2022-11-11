@@ -153,7 +153,7 @@ public class GameViewController {
 
 
     public void toggleButton() {
-      }
+        }
 
 
     public void sendShapeToServer() {
